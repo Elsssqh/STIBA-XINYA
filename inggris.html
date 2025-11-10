@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sastra Inggris — STIBA Tarumanagara Xinya</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --clr-bg: #1e3a5f;
+      --clr-nav-bg: rgba(13, 51, 82, 0.8);
+      --clr-overlay: rgba(44, 62, 80, 0.7);
+      --clr-overlay-strong: rgba(44, 62, 80, 0.85);
+      --clr-card: rgba(30, 40, 100, 0.7);
+      --clr-card-alt: rgba(50, 60, 120, 0.7);
+      --clr-white: #ffffff;
+      --clr-accent: #ff6b6b;
+      --shadow-lg: 0 8px 20px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.2);
+      --radius: 20px;
+    }
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background: var(--clr-bg);
+      color: var(--clr-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .background-image {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background:
+        linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+        url('新雅 (1).png') no-repeat center center;
+      background-size: cover;
+      z-index: -2;
+    }
+    .background-image::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('pattern-waves.png') repeat;
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 5%;
+      background: var(--clr-nav-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 50px;
+      margin: 20px auto 40px auto;
+      max-width: 1200px;
+    }
+    .logo-container img {
+      height: 200px;
+      width: auto;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    nav a {
+      color: var(--clr-white);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--clr-accent);
+    }
+    .globe-icon {
+      width: 36px;
+      height: 36px;
+      background-color: var(--clr-white);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .globe-icon img {
+      width: 20px; height: 20px;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      background: var(--clr-nav-bg);
+      backdrop-filter: blur(8px);
+      list-style: none;
+      padding: 0.5rem 0;
+      border-radius: 10px;
+      box-shadow: var(--shadow-md);
+      min-width: 200px;
+    }
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    .dropdown-menu li {
+      padding: 0.4rem 1.2rem;
+    }
+    .dropdown-menu a {
+      color: var(--clr-white);
+      font-size: 0.9rem;
+      display: block;
+    }
+    .dropdown-menu a:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--clr-accent);
+    }
+
+    /* Hero Section - Improved margins */
+    .hero {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+      align-items: stretch;
+      margin-bottom: 60px;
+    }
+    .hero-image-container {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      height: 400px;
+    }
+    .hero-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-text-overlay {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      color: var(--clr-white);
+    }
+    .hero-text-overlay .s1 {
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-bottom: 5px;
+    }
+    .hero-text-overlay .title {
+      font-family: 'Zhi Mang Xing', cursive;
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+    .hero-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+    .card {
+      background-color: var(--clr-card);
+      padding: 30px;
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: transform 0.3s, background 0.3s;
+      min-height: 180px;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      background: var(--clr-card-alt);
+    }
+    .card p {
+      padding-right: 40px;
+      margin-bottom: 0;
+    }
+    .card-arrow {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 35px;
+      height: 35px;
+      background-color: black;
+      color: var(--clr-white);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Apply Info Section - Improved spacing */
+    .apply-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin: 60px 0;
+    }
+    .apply-text {
+      padding: 20px;
+    }
+    .apply-text p {
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    .apply-btn {
+      background-color: #334e6e;
+      color: var(--clr-white);
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      font-size: 1rem;
+    }
+    .apply-btn:hover {
+      background-color: #4a6a92;
+    }
+    .apply-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .apply-images img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+
+    /* Showcase Section - Improved margins */
+    .showcase {
+      margin: 60px 0;
+      text-align: center;
+    }
+    .showcase img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 30px;
+    }
+    .showcase p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      padding: 0 20px;
+    }
+
+    /* Gallery Section - Improved spacing */
+    .gallery {
+      margin: 60px 0;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(2, 200px);
+      gap: 20px;
+    }
+    .gallery-item {
+      overflow: hidden;
+      border-radius: var(--radius);
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .item-1 { 
+      grid-column: 1 / 3; 
+      grid-row: 1 / 3; 
+    }
+    .item-2 { 
+      grid-column: 5 / 7; 
+      grid-row: 2 / 3; 
+    }
+    .item-3 { 
+      grid-column: 5 / 7; 
+      grid-row: 1 / 2; 
+    }
+    .item-4 {
+      grid-column: 3 / 5;
+      grid-row: 1 / 3;
+      background: var(--clr-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Zhi Mang Xing', cursive;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--clr-white);
+      padding: 20px;
+    }
+    .gallery-arrow {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--clr-white);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .gallery-arrow:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Footer - Improved spacing */
+    footer {
+      margin: 80px 0 40px 0;
+      padding-top: 40px;
+      border-top: 1px solid var(--clr-accent);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .footer-left img {
+      height: 45px;
+      margin-bottom: 15px;
+    }
+    .footer-left p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+    }
+    .footer-right .chinese-chars {
+      font-family: 'Zhi Mang Xing', cursive;
+      font-size: 4rem;
+      color: var(--clr-white);
+      line-height: 1;
+    }
+
+    /* Responsive improvements */
+    @media (max-width: 992px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+      .hero-image-container {
+        height: 350px;
+      }
+      .gallery {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, 200px);
+      }
+      .item-1 { grid-column: 1 / 3; grid-row: 1 / 3; }
+      .item-4 { grid-column: 3 / 5; grid-row: 1 / 3; }
+      .item-3 { grid-column: 1 / 3; grid-row: 3 / 4; }
+      .item-2 { grid-column: 3 / 5; grid-row: 3 / 4; }
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 1rem;
+      }
+      .hero-image-container {
+        height: 300px;
+      }
+      .hero-text-overlay {
+        bottom: 20px;
+        left: 20px;
+      }
+      .hero-text-overlay .title {
+        font-size: 2.5rem;
+      }
+      .apply-info {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin: 40px 0;
+      }
+      .apply-images {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      .apply-images img {
+        height: 150px;
+      }
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        gap: 15px;
+      }
+      .gallery-item {
+        grid-column: auto;
+        grid-row: auto;
+        height: 200px;
+      }
+      .item-1, .item-4 {
+        height: 415px;
+      }
+      footer {
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+        text-align: center;
+        margin: 60px 0 30px 0;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 15px;
+      }
+      nav ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-text-overlay .title {
+        font-size: 2rem;
+      }
+      .card {
+        padding: 20px;
+        min-height: 150px;
+      }
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      .gallery-item {
+        height: 250px;
+      }
+      .item-1, .item-4 {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="background-image"></div>
+  <div class="container">
+    <header>
+      <div class="logo-container">
+        <img src="daguo.png" alt="STIBA Logo">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="aboutus.html">About</a></li>
+          <li class="dropdown">
+            <a href="#">Academic Program ▼</a>
+            <ul class="dropdown-menu">
+              <li><a href="inggris.html">S1 Sastra Inggris</a></li>
+              <li><a href="#">S1 Mandarin</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </nav>
+      <div class="globe-icon">🌐</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-image-container">
+          <img src="tst (1).jpg" alt="Classroom">
+          <div class="hero-text-overlay">
+            <div class="s1">S1</div>
+            <div class="title">Sastra<br>Bahasa Inggris</div>
+          </div>
+        </div>
+        <div class="hero-cards">
+          <div class="card">
+            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
+            <div class="card-arrow">→</div>
+          </div>
+          <div class="card">
+            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
+            <div class="card-arrow">→</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="apply-info">
+        <div class="apply-text">
+          <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text.</p>
+          <button class="apply-btn">Apply Now</button>
+        </div>
+        <div class="apply-images">
+          <img src="tst (1).jpg" alt="Typing">
+          <img src="tst (1).jpg" alt="Reading">
+        </div>
+      </section>
+
+      <section class="showcase">
+        <img src="tst (1).jpg" alt="Showcase">
+        <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+      </section>
+
+      <section class="gallery">
+        <div class="gallery-item item-1">
+          <img src="tst (1).jpg" alt="Book Spines">
+        </div>
+        <div class="gallery-item item-2">
+          <img src="tst (1).jpg" alt="Open Book">
+        </div>
+        <div class="gallery-item item-3">
+          <img src="tst (1).jpg" alt="Desk Organizer">
+        </div>
+        <div class="gallery-item item-4">
+          <div>the<br>1500s</div>
+          <div class="gallery-arrow">↗</div>
+        </div>
+      </section>
+    </main>
+
+    
+
+  <script>
+    // Load header.html into the placeholder if present
+    (function(){
+      fetch('header.html').then(r=>r.text()).then(html=>{
+        var p = document.getElementById('site-header'); 
+        if(p) p.innerHTML = html;
+      }).catch(err=>console.error('Could not load header.html', err));
+    })();
+  </script>
+</body>
+</html>

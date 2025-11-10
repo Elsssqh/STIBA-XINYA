@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Xinya College | STIBA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 5%;
+      background: rgba(13, 51, 82, 0.8);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      margin: 0;
+      width: 100%;
+      position: relative;
+      z-index: 100;
+      border-radius: 50px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      height: 40px;
+    }
+    .logo-img {
+      height: 200px; /* Fixed: was 200px — too big for header */
+      width: auto;
+      display: block;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #ff6b6b;
+    }
+
+    /* === Dropdown Menu Styles === */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(13, 51, 82, 0.95);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      list-style: none;
+      padding: 0.5rem 0;
+      margin: 0;
+      min-width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+      z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu li {
+      padding: 0.5rem 1.2rem;
+    }
+
+    .dropdown-menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      display: block;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      color: #ff6b6b;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .globe-btn {
+      background: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .globe-icon {
+      font-size: 1.2rem;
+      color: #0d3352;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 5%;
+      background: rgba(13, 51, 82, 0.8);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      margin: 0;
+      width: 100%;
+      position: relative;
+      z-index: 100;
+      border-radius: 50px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      height: 40px;
+    }
+    .logo-img {
+      height: 200px; /* Fixed: was 200px — too big for header */
+      width: auto;
+      display: block;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #ff6b6b;
+    }
+
+    /* === Dropdown Menu Styles === */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(13, 51, 82, 0.95);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      list-style: none;
+      padding: 0.5rem 0;
+      margin: 0;
+      min-width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+      z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu li {
+      padding: 0.5rem 1.2rem;
+    }
+
+    .dropdown-menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      display: block;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      color: #ff6b6b;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .globe-btn {
+      background: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .globe-icon {
+      font-size: 1.2rem;
+      color: #0d3352;
+    }
+
+
+    /* =============== NEW: History / Milestones Section =============== */
+    .history-section {
+      padding: 5rem 5%;
+      background: rgba(10, 35, 60, 0.8);
+      position: relative;
+      z-index: 2;
+    }
+
+    .timeline {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: rgba(255, 221, 87, 0.3);
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      display: flex;
+      margin-bottom: 3.5rem;
+      position: relative;
+      width: 100%;
+    }
+
+    .timeline-item:nth-child(odd) {
+      justify-content: flex-start;
+      padding-right: calc(50% + 30px);
+    }
+
+    .timeline-item:nth-child(even) {
+      justify-content: flex-end;
+      padding-left: calc(50% + 30px);
+    }
+
+    .timeline-content {
+      background: rgba(13, 51, 82, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 1.8rem;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+    }
+
+    .timeline-year {
+      font-family: 'Zhi Mang Xing', cursive;
+      font-size: 2.2rem;
+      color: #ffdd57;
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
+
+    .timeline-text {
+      font-size: 1rem;
+      line-height: 1.7;
+      opacity: 0.92;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      background: #ffdd57;
+      border: 4px solid #1e3a5f;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    /* Responsive Timeline */
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 30px;
+      }
+
+      .timeline-item {
+        flex-direction: row;
+        padding-left: 70px !important;
+        padding-right: 0 !important;
+        text-align: left;
+      }
+
+      .timeline-content {
+        max-width: none;
+      }
+
+      .timeline-dot {
+        left: 30px;
+      }
+
+      .timeline-year {
+        text-align: left;
+        font-size: 1.8rem;
+      }
+    }
+
+    /* Keep existing styles below */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background: #1e3a5f;
+      color: white;
+      line-height: 1.7;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .background-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+        url('新雅.png') no-repeat center center;
+      background-size: cover;
+      z-index: -1;
+      will-change: transform;
+    }
+
+    .background-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0aCBkPSJNMzAgMGMtMTYuNTY4IDAtMzAgMTMuNDMyLTMwIDMwczEzLjQzMiAzMCAzMCAzMHMyMC0xMy40MzIgMzAtMzBTNDYuNTY4IDAgMzAgMHoiIGZpbGw9IiMxZTNhNWYiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PC9zdmc+') repeat;
+      opacity: 0.15;
+      z-index: -1;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background: rgba(13, 51, 82, 0.85);
+
+      margin: 0;
+      width: 100%;
+      position: relative;
+      z-index: 100;
+      border-radius: 50px;
+      margin: 1.5rem auto;
+      max-width: 1200px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+    .logo-img {
+      height: 200px; 
+      width: auto;
+      display: block;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ffdd57;
+      text-shadow: 0 0 8px rgba(255, 221, 87, 0.4);
+    }
+
+    .globe-btn {
+      background: rgba(255, 255, 255, 0.15);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .globe-btn:hover {
+      background: rgba(255, 221, 87, 0.3);
+    }
+
+    .globe-icon {
+      font-size: 1.2rem;
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 5%;
+      position: relative;
+      z-index: 3;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 2rem;
+      background: rgba(13, 51, 82, 0.6);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-title {
+      font-family: 'Zhi Mang Xing', cursive;
+      font-size: 4.5rem;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      letter-spacing: 3px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.4rem;
+      font-weight: 300;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    .hero-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      opacity: 0.95;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Philosophy Section */
+    .philosophy-section {
+      padding: 5rem 5%;
+      background: rgba(13, 51, 82, 0.85);
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-family: 'Zhi Mang Xing', cursive;
+      font-size: 4rem;
+      color: #ffdd57;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.85;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .philosophy-card {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 2.5rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255, 221, 87, 0.2);
+    }
+
+    .philosophy-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 221, 87, 0.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    .card-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      color: #ffdd57;
+    }
+
+    .card-title {
+      font-family: 'Zhi Mang Xing', cursive;
+      font-size: 2.2rem;
+      margin-bottom: 1.2rem;
+      color: white;
+    }
+
+    .card-text {
+      font-size: 1rem;
+      opacity: 0.9;
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 2.5rem 5%;
+      background: rgba(13, 51, 82, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .footer-logo {
+      height: 70px;
+      filter: brightness(1.3);
+    }
+
+    .footer-info {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .footer-address {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      line-height: 1.5;
+    }
+
+    .footer-text {
+      font-family: 'Zhi Mang Xing', cursive;
+      font-size: 2.8rem;
+      color: #ffdd57;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 1.2rem;
+        gap: 1.2rem;
+        margin: 1rem auto;
+      }
+
+      nav ul {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero-title {
+        font-size: 2.8rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+      }
+
+      .card-title {
+        font-size: 1.8rem;
+      }
+
+      
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .philosophy-card {
+        padding: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="background-image"></div>
+
+    <!-- Header placeholder: header loaded from header.html -->
+    <div id="site-header"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">新雅学院</h1>
+      <p class="hero-subtitle">Integrating  · Inspiring Wisdom · Shaping the Future</p>
+      <p class="hero-text">
+        Xinya College is dedicated to cultivating outstanding talents with global vision, humanistic spirit, and innovative mindset. Centered on interdisciplinary education, we integrate Eastern wisdom with Western academic excellence to create a platform for deep thinking and innovative practice.
+      </p>
+    </div>
+  </section>
+
+  <!-- Philosophy Section -->
+  <!-- <section class="philosophy-section">
+    <div class="section-header">
+      <h2 class="section-title">Our Philosophy</h2>
+      <p class="section-subtitle">Xinya College's Educational Philosophy</p>
+    </div>
+
+    <div class="philosophy-grid">
+      <div class="philosophy-card">
+        <div class="card-icon">📚</div>
+        <h3 class="card-title">Liberal Arts Education</h3>
+        <p class="card-text">
+          Grounded in classic readings and in-depth seminars, we break disciplinary boundaries to foster critical thinking and cross-domain integration skills.
+        </p>
+      </div>
+
+      <div class="philosophy-card">
+        <div class="card-icon">🌏</div>
+        <h3 class="card-title">Global Perspective</h3>
+        <p class="card-text">
+          Through international exchange programs and multicultural courses, we broaden students' global horizons and cultivate global citizenship.
+        </p>
+      </div>
+
+      <div class="philosophy-card">
+        <div class="card-icon">💡</div>
+        <h3 class="card-title">Innovation & Practice</h3>
+        <p class="card-text">
+          We encourage applying theoretical knowledge to real-world scenarios, igniting innovative potential through research projects and social practice.
+        </p>
+      </div>
+    </div>
+  </section> -->
+<!-- NEW: History & Milestones with Images -->
+<section class="history-section">
+  <div class="section-header">
+    <h2 class="section-title">Our Journey</h2>
+    <p class="section-subtitle">Our Journey</p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <img src="C:\Users\Elsie\OneDrive\Desktop\YAYASAN TARUMANAGARA\STIBA\daguo.png" alt="2018 Founding" class="milestone-img">
+        <div class="timeline-year">2018</div>
+        <p class="timeline-text">Xinya College was officially established in Jakarta, Indonesia, as an innovative educational platform under STIBA Dagu University, pioneering the localization of liberal arts education.</p>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <img src="C:\Users\Elsie\OneDrive\Desktop\YAYASAN TARUMANAGARA\STIBA\daguo.png" alt="2020 Curriculum Launch" class="milestone-img">
+        <div class="timeline-year">2020</div>
+        <p class="timeline-text">Launched its first interdisciplinary curriculum integrating philosophy, literature, social sciences, and digital humanities, earning recognition as an Innovative Education Project by the Indonesian Ministry of Education.</p>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <img src="C:\Users\Elsie\OneDrive\Desktop\YAYASAN TARUMANAGARA\STIBA\daguo.png" alt="2022 Global Scholars" class="milestone-img">
+        <div class="timeline-year">2022</div>
+        <p class="timeline-text">Established partnerships with multiple international universities and launched the "Global Xinya Scholars Program," sending the first cohort of students overseas for joint research projects.</p>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <img src="C:\Users\Elsie\OneDrive\Desktop\YAYASAN TARUMANAGARA\STIBA\daguo.png" alt="2024 First Graduates" class="milestone-img">
+        <div class="timeline-year">2024</div>
+        <p class="timeline-text">Xinya College celebrated its inaugural graduating class, with 95% advancing to world-renowned universities or entering social innovation fields, significantly enhancing the college's reputation.</p>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Load header.html into the placeholder div
+  (function(){
+    fetch('header.html')
+      .then(function(r){ return r.text(); })
+      .then(function(html){
+        var placeholder = document.getElementById('site-header');
+        if(placeholder) placeholder.innerHTML = html;
+      })
+      .catch(function(err){ console.error('Could not load header.html', err); });
+  })();
+</script>
+
+</body>
+</html>

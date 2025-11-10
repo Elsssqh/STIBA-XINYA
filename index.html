@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>STIBA - 达国新雅学院</title>
+  <!-- Font for "新雅" -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+  
+  <!-- Main text font -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background: #1e3a5f;
+      color: white;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .background-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+        /* url('新雅.png') no-repeat center center; */
+         url('新雅 (2).png') no-repeat center center;
+      background-size: cover;
+      z-index: -1;
+      will-change: transform;
+    }
+
+    .background-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://via.placeholder.com/1920x1080/1e3a5f/ffffff?text=Pattern+Waves') repeat;
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 5%;
+      background: rgba(13, 51, 82, 0.8);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      margin: 0;
+      width: 100%;
+      position: relative;
+      z-index: 100;
+      border-radius: 50px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      height: 40px;
+    }
+    .logo-img {
+      height: 200px; /* Fixed: was 200px — too big for header */
+      width: auto;
+      display: block;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #ff6b6b;
+    }
+
+    /* === Dropdown Menu Styles === */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(13, 51, 82, 0.95);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      list-style: none;
+      padding: 0.5rem 0;
+      margin: 0;
+      min-width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+      z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu li {
+      padding: 0.5rem 1.2rem;
+    }
+
+    .dropdown-menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      display: block;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      color: #ff6b6b;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .globe-btn {
+      background: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .globe-icon {
+      font-size: 1.2rem;
+      color: #0d3352;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      z-index: 3;
+    }
+
+    .vertical-text {
+      position: absolute;
+      left: 10%;
+      top: 30%;
+      transform: translateY(-30%);
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      font-size: 5rem;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      z-index: 10;
+      line-height: 1;
+      font-family: 'Zhi Mang Xing', cursive;
+    }
+
+    .content-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      padding-top: 5rem;
+    }
+
+    .text-content {
+      max-width: 500px;
+      text-align: right;
+      padding-right: 2rem;
+      position: relative;
+    }
+
+    .text-content p {
+      font-size: 1rem;
+      opacity: 0.85;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 10rem 5%;
+      background: rgba(13, 51, 82, 0.9);
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-logo {
+      height: 200px;
+      filter: brightness(1.2);
+      transition: transform 0.3s ease;
+    }
+
+    .about-text {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      opacity: 0.9;
+    }
+
+    /* Collaboration Section */
+    .collaboration-section {
+      padding: 10rem 5%;
+      background: rgba(13, 51, 82, 0.9);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title {
+      font-family: 'Zhi Mang Xing', cursive;
+      font-size: 5rem;
+      margin-bottom: 2rem;
+    }
+
+    .collab-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .collab-logo-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      width: 180px;
+    }
+
+    .collab-logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .collab-logo img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .collab-name {
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-top: 0.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+      }
+
+      nav ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero {
+        padding: 3rem 5%;
+      }
+
+      .vertical-text {
+        left: 2%;
+        font-size: 2rem;
+      }
+
+      .content-wrapper {
+        justify-content: center;
+        text-align: center;
+        padding-top: 3rem;
+      }
+
+      .text-content {
+        max-width: 90%;
+        text-align: center;
+        padding-right: 0;
+      }
+
+      .large-text {
+        font-size: 4rem;
+        top: 20%;
+        right: 2%;
+      }
+
+      .about-logos {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .collab-logos {
+        gap: 1.5rem;
+      }
+
+      .collab-logo-item {
+        width: 140px;
+      }
+
+      .collab-logo {
+        width: 100px;
+        height: 100px;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background-image"></div>
+  <div id="site-header"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="vertical-text"></div>
+    <div class="content-wrapper">
+      <div class="text-content">
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-logos">
+      <img src="daguo.png" alt="STIBA Tarumanagara Xinya" class="about-logo">
+      <img src="Logo-Yayasan-Tarumanagara-White-1980x715.png" alt="YAYASAN TARUMANAGARA" class="about-logo">
+    </div>
+    <div class="about-text">
+      At Tarumanagara Xinya College, we offer a unique educational paradigm. We blend the profound wisdom of Eastern scholarly traditions with cutting-edge, interdisciplinary learning, creating a vibrant academic community dedicated to building a better future.
+    </div>
+  </section>
+
+  <!-- Collaboration Section -->
+  <section class="collaboration-section">
+    <h2 class="section-title">Collaboration 合作</h2>
+    <div class="collab-logos">
+      <div class="collab-logo-item">
+        <div class="collab-logo">
+          <img src="fjnu-logo.png" alt="Fujian Normal University">
+        </div>
+        <div class="collab-name">Fujian Normal University</div>
+      </div>
+      <div class="collab-logo-item">
+        <div class="collab-logo">
+          <img src="synu-logo.png" alt="Shenyang Normal University">
+        </div>
+        <div class="collab-name">Shenyang Normal University</div>
+      </div>
+      <div class="collab-logo-item">
+        <div class="collab-logo">
+          <img src="huaqiao-logo.png" alt="Huaqiao University">
+        </div>
+        <div class="collab-name">Huaqiao University</div>
+      </div>
+    </div>
+  </section>
+
+
+    <script>
+      // Load header.html into the placeholder if present
+      (function(){
+        fetch('header.html').then(r=>r.text()).then(html=>{
+          var p = document.getElementById('site-header'); if(p) p.innerHTML = html;
+        }).catch(err=>console.error('Could not load header.html', err));
+      })();
+    </script>
+
+  </body>
+  </html>

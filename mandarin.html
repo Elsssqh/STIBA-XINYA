@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>STIBA - 达国新雅学院</title>
+  <!-- Font for "新雅" -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+  
+  <!-- Main text font -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1a4b8c;
+      --secondary: #e63946;
+      --accent: #2a9d8f;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --light-gray: #e9ecef;
+    }
+
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background: #1e3a5f;
+      color: white;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .background-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+        url('新雅 (1).png') no-repeat center center;
+      background-size: cover;
+      
+      z-index: -1;
+      will-change: transform;
+    }
+
+    .background-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://via.placeholder.com/1920x1080/1e3a5f/ffffff?text=Pattern+Waves') repeat;
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 5%;
+      background: rgba(13, 51, 82, 0.8);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      margin: 0;
+      width: 100%;
+      position: relative;
+      z-index: 100;
+      border-radius: 50px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      height: 40px;
+    }
+    .logo-img {
+      height: 60px;
+      width: auto;
+      display: block;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #ff6b6b;
+    }
+
+    /* === Dropdown Menu Styles === */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(13, 51, 82, 0.95);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      list-style: none;
+      padding: 0.5rem 0;
+      margin: 0;
+      min-width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+      z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu li {
+      padding: 0.5rem 1.2rem;
+    }
+
+    .dropdown-menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      display: block;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      color: #ff6b6b;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .globe-btn {
+      background: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .globe-icon {
+      font-size: 1.2rem;
+      color: #0d3352;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      z-index: 3;
+      padding: 5rem 5%;
+    }
+
+    .vertical-text {
+      position: absolute;
+      left: 10%;
+      top: 30%;
+      transform: translateY(-30%);
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      font-size: 5rem;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      z-index: 10;
+      line-height: 1;
+      font-family: 'Zhi Mang Xing', cursive;
+    }
+
+    .content-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      padding-top: 5rem;
+    }
+
+    .text-content {
+      max-width: 500px;
+      text-align: right;
+      padding-right: 2rem;
+      position: relative;
+    }
+
+    .text-content p {
+      font-size: 1rem;
+      opacity: 0.85;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    /* Academic Programs Section */
+    .academic-programs {
+      padding: 5rem 5%;
+      background: rgba(13, 51, 82, 0.9);
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+      color: white;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background-color: var(--secondary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 5rem;
+    }
+
+    .program-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+
+    .program-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .program-img {
+      height: 200px;
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+    }
+
+    .program-content {
+      padding: 25px;
+    }
+
+    .program-content h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: white;
+    }
+
+    .program-content p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px;
+    }
+
+    .program-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--secondary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .program-link i {
+      margin-left: 5px;
+      transition: transform 0.3s;
+    }
+
+    .program-link:hover i {
+      transform: translateX(5px);
+    }
+
+    /* Honors Section */
+    .honors-section {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 5rem 0;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      margin-bottom: 5rem;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+
+    .honors-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .honors-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .honors-header h2 {
+      font-size: 2.2rem;
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .honors-header p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .honors-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .honors-text {
+      padding-right: 20px;
+    }
+
+    .honors-text h3 {
+      font-size: 1.8rem;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .honors-text p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 25px;
+      line-height: 1.7;
+    }
+
+    .honors-image {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      border-radius: 10px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background-color: rgba(13, 51, 82, 0.9);
+      padding: 5rem 0;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+
+    .stat-item {
+      padding: 30px 20px;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.1rem;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 5rem 5%;
+      background: rgba(13, 51, 82, 0.9);
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-logo {
+      height: 200px;
+      filter: brightness(1.2);
+      transition: transform 0.3s ease;
+    }
+
+    .about-text {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      opacity: 0.9;
+    }
+
+    /* Collaboration Section */
+    .collaboration-section {
+      padding: 5rem 5%;
+      background: rgba(13, 51, 82, 0.9);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .collab-title {
+      font-family: 'Zhi Mang Xing', cursive;
+      font-size: 5rem;
+      margin-bottom: 2rem;
+    }
+
+    .collab-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .collab-logo-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      width: 180px;
+    }
+
+    .collab-logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .collab-logo img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .collab-name {
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-top: 0.5rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: rgba(13, 51, 82, 0.95);
+      color: white;
+      padding: 3rem 0 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 2rem;
+      padding: 0 5%;
+    }
+
+    .footer-column h3 {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+      color: white;
+      position: relative;
+    }
+
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 3px;
+      background-color: var(--secondary);
+      bottom: -10px;
+      left: 0;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+      }
+
+      nav ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero {
+        padding: 3rem 5%;
+      }
+
+      .vertical-text {
+        left: 2%;
+        font-size: 2rem;
+      }
+
+      .content-wrapper {
+        justify-content: center;
+        text-align: center;
+        padding-top: 3rem;
+      }
+
+      .text-content {
+        max-width: 90%;
+        text-align: center;
+        padding-right: 0;
+      }
+
+      .honors-content {
+        grid-template-columns: 1fr;
+      }
+
+      .honors-text {
+        padding-right: 0;
+      }
+
+      .about-logos {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .collab-logos {
+        gap: 1.5rem;
+      }
+
+      .collab-logo-item {
+        width: 140px;
+      }
+
+      .collab-logo {
+        width: 100px;
+        height: 100px;
+      }
+
+      .collab-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background-image"></div>
+
+  <!-- Header -->
+  <!-- Header placeholder: header loaded from header.html -->
+  <div id="site-header"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="vertical-text">达国新雅学院</div>
+    <div class="content-wrapper">
+      <div class="text-content">
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Academic Programs Section -->
+  <section class="academic-programs">
+    <div class="container">
+      <div class="section-title">
+        <h2>Academic Program</h2>
+      </div>
+      
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-img">
+            <i class="fas fa-language"></i>
+          </div>
+          <div class="program-content">
+            <h3>华语教学</h3>
+            <p>Comprehensive Chinese language education program focusing on linguistic proficiency and cultural understanding.</p>
+            <a href="#" class="program-link">
+              Explore Program <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="program-card">
+          <div class="program-img">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <div class="program-content">
+            <h3>华语商务</h3>
+            <p>Business Chinese program designed for professionals seeking to enhance their commercial communication skills.</p>
+            <a href="#" class="program-link">
+              Explore Program <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="program-card">
+          <div class="program-img">
+            <i class="fas fa-plane"></i>
+          </div>
+          <div class="program-content">
+            <h3>华语旅游</h3>
+            <p>Tourism-focused Chinese language program for hospitality and travel industry professionals.</p>
+            <a href="#" class="program-link">
+              Explore Program <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="honors-section">
+        <div class="honors-container">
+          <div class="honors-header">
+            <h2>Achievement</h2>
+            <p>Celebrating excellence and achievement across our academic community</p>
+          </div>
+          
+          <div class="honors-content">
+            <div class="honors-text">
+              <h3>Achievement</h3>
+              <p>In recognition of outstanding academic excellence, innovative research, and dedicated services to the community, STIBA proudly acknowledges the remarkable achievements of its students, faculty, and alumni.</p>
+              <p>Our honors program provides exceptional students with enhanced academic opportunities, specialized mentorship, and a community of scholars dedicated to pushing the boundaries of knowledge.</p>
+              <a href="#" class="program-link">
+                Learn More About Honors <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+            
+            <div class="honors-image">
+              Celebrating Excellence in Academia
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="stats-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>By The Numbers</h2>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">95%</div>
+          <div class="stat-label">Graduation Rate</div>
+        </div>
+        
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Academic Programs</div>
+        </div>
+        
+        <div class="stat-item">
+          <div class="stat-number">1:12</div>
+          <div class="stat-label">Student-Faculty Ratio</div>
+        </div>
+        
+        <div class="stat-item">
+          <div class="stat-number">85%</div>
+          <div class="stat-label">Research Participation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <script>
+    (function(){
+      fetch('header.html').then(function(r){return r.text();}).then(function(html){
+        var p = document.getElementById('site-header'); if(p) p.innerHTML = html;
+      }).catch(function(e){console.error('Could not load header.html', e);});
+    })();
+  </script>
+
+</body>
+</html>
+<script>
+        (function(){
+          fetch('header.html').then(function(r){return r.text();}).then(function(html){
+            var p = document.getElementById('site-header'); if(p) p.innerHTML = html;
+          }).catch(function(e){console.error('Could not load header.html', e);});
+        })();
+      </script>

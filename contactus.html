@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - STIBA</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --white: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #2c3e50);
+            color: var(--white);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(44, 62, 80, 0.8);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 20px;
+        }
+        
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .globe-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: url('新雅 (1).png') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 62, 80, 0.7);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+        
+        .cta-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 40px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
+        }
+        
+        /* Contact Info Cards */
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .info-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-card i {
+            font-size: 1.5rem;
+        }
+        
+        .info-card p {
+            margin-bottom: 5px;
+        }
+        
+        .info-card a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .info-card a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Contact Form */
+        .contact-form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .form-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .form-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            transition: var(--transition);
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+        
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Map */
+        .map-container {
+            height: 300px;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: url('https://placehold.co/800x300/1a2a6c/ffffff?text=Campus+Map') no-repeat center center;
+            background-size: cover;
+        }
+        
+        /* Social Media */
+        .social-media {
+            margin-top: 30px;
+        }
+        
+        .social-media h3 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.1) rotate(10deg);
+            background: var(--secondary-color);
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(44, 62, 80, 0.8);
+            padding: 30px 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .footer-logo {
+            height: 50px;
+        }
+        
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+        
+        /* Decorative Elements */
+        .decoration {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            font-size: 4rem;
+            transform: rotate(-30deg);
+        }
+        
+        .decoration-2 {
+            bottom: 10%;
+            right: 5%;
+            font-size: 4rem;
+            transform: rotate(30deg);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav li {
+                margin: 5px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-form-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-card {
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .contact-form-container {
+                padding: 15px;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            input, textarea {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+  <div class="background-image"></div>
+  <div id="site-header"></div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Contact Us 联系我们</h1>
+            <p>准备好开始你的学习之旅了吗？请联系我们招生团队，我们将竭诚为您服务。<br>Ready to start your study journey? Get in touch with our team</p>
+            <a href="#" class="cta-button">JOIN DEGREE PROGRAM</a>
+        </div>
+    </section>
+    
+    <div class="container">
+        <section class="main-content">
+            <h2 class="section-title">BAHASA MANDARIN</h2>
+            
+            <div class="contact-info-grid">
+                <div class="info-card">
+                    <h3><i>📞</i>电话号码<br>Phone Number</h3>
+                    <p>0812-8888-2869</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i>✉️</i>电子邮箱<br>Email Address</h3>
+                    <p><a href="mailto:tar@stibatarumanagara.edu.org">tar@stibatarumanagara.edu.org</a></p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i>⏰</i>营业时间<br>Operational Hour</h3>
+                    <p>Monday - Friday<br>09.30 - 16.30</p>
+                </div>
+            </div>
+            
+            <div class="contact-form-container">
+                <div class="form-section">
+                    <h3 class="form-title">校园地址<br>Campus Address</h3>
+                    <div class="map-container"></div>
+                    <p style="margin-top: 15px; text-align: center;">
+                        Universitas Tarumanagara Kampus 2<br>
+                        Jl. Letjen S. Parman No. 24<br>
+                        Grogol, Jakarta Barat 11440<br>
+                        Indonesia
+                    </p>
+                </div>
+                
+                <div class="form-section">
+                    <h3 class="form-title">Contact Us for Business Inquiry<br>业务联系</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" rows="4" required></textarea>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="btn-secondary">Clear Form</button>
+                            <button type="submit" class="btn-primary">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="social-media">
+                <h3>社交媒体<br>Our Social Media</h3>
+                <div class="social-icons">
+                    <div class="social-icon">IG</div>
+                    <div class="social-icon">IN</div>
+                    <div class="social-icon">FB</div>
+                    <div class="social-icon">X</div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <img src="https://placehold.co/150x40/2c3e50/ffffff?text=STIBA" alt="STIBA Logo" class="footer-logo">
+            <div class="footer-text">
+                Address: Universitas Tarumanagara Campus 2, Jl. Letjen S. Parman No. 24, Grogol, Jakarta Barat 11440, Indonesia
+            </div>
+            <div class="copyright">
+                © 2023 STIBA Tarumanagara. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <script>
+      // Load header.html into the placeholder if present
+      (function(){
+        fetch('header.html').then(r=>r.text()).then(html=>{
+          var p = document.getElementById('site-header'); if(p) p.innerHTML = html;
+        }).catch(err=>console.error('Could not load header.html', err));
+      })();
+    </script>
+
+  </body>
+  </html>
