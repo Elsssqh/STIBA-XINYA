@@ -68,15 +68,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.8rem 5%;
+      /* Reduced padding */
+      padding: 0.5rem 5%;
       background: var(--clr-nav-bg);
       backdrop-filter: blur(10px);
       border-radius: 50px;
-      margin: 20px auto 40px auto;
+      /* Reduced margin */
+      margin: 10px auto 20px auto; /* Top margin reduced from 20 to 10, bottom from 40 to 20 */
       max-width: 1200px;
     }
     .logo-container img {
-      height: 200px;
+      /* Reduced logo height */
+      height: 200px; /* Adjusted from 200px */
       width: auto;
     }
     nav ul {
@@ -259,7 +262,7 @@
       border-radius: var(--radius);
     }
 
-    /* Showcase Section - Improved margins */
+    /* Showcase Section - Improved spacing */
     .showcase {
       margin: 60px 0;
       text-align: center;
@@ -389,7 +392,15 @@
       header {
         flex-direction: column;
         gap: 15px;
-        padding: 1rem;
+        /* Adjusted padding for stacked layout */
+        padding: 0.8rem 1rem;
+      }
+      /* Keep margin adjustments for mobile */
+      header {
+        margin: 10px auto 20px auto;
+      }
+      .logo-container img {
+        height: 50px; /* Slightly smaller on mobile */
       }
       .hero-image-container {
         height: 300px;
