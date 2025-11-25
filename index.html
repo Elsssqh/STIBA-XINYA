@@ -55,114 +55,8 @@
       z-index: -1;
     }
 
-    /* Header */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.8rem 5%;
-      background: rgba(13, 51, 82, 0.8);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      margin: 0;
-      width: 100%;
-      position: relative;
-      z-index: 100;
-      border-radius: 50px;
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-      height: 40px;
-    }
-    .logo-img {
-      height: 200px; /* Fixed: was 200px — too big for header */
-      width: auto;
-      display: block;
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
-    nav a:hover {
-      color: #ff6b6b;
-    }
-
-    /* === Dropdown Menu Styles === */
-    .dropdown {
-      position: relative;
-    }
-
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: rgba(13, 51, 82, 0.95);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-      list-style: none;
-      padding: 0.5rem 0;
-      margin: 0;
-      min-width: 200px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-      z-index: 1000;
-    }
-
-    .dropdown:hover .dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .dropdown-menu li {
-      padding: 0.5rem 1.2rem;
-    }
-
-    .dropdown-menu a {
-      color: white;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 400;
-      display: block;
-      transition: color 0.2s, background 0.2s;
-    }
-
-    .dropdown-menu a:hover {
-      color: #ff6b6b;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .globe-btn {
-      background: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-
-    .globe-icon {
-      font-size: 1.2rem;
-      color: #0d3352;
-    }
+    /* Header/nav CSS moved to header.html to avoid duplication. */
+    /* See: header.html (single source of truth for header and nav styles) */
 
     /* Hero Section */
     .hero {
@@ -303,18 +197,6 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        padding: 1rem;
-        gap: 1rem;
-      }
-
-      nav ul {
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
       .hero {
         padding: 3rem 5%;
       }
@@ -400,19 +282,19 @@
     <div class="collab-logos">
       <div class="collab-logo-item">
         <div class="collab-logo">
-          <img src="fjnu-logo.png" alt="Fujian Normal University">
+          <img src="Fujian_Normal_University_(crest).png" alt="Fujian Normal University">
         </div>
         <div class="collab-name">Fujian Normal University</div>
       </div>
       <div class="collab-logo-item">
         <div class="collab-logo">
-          <img src="synu-logo.png" alt="Shenyang Normal University">
+          <img src="sy.png" alt="Shenyang Normal University">
         </div>
         <div class="collab-name">Shenyang Normal University</div>
       </div>
       <div class="collab-logo-item">
         <div class="collab-logo">
-          <img src="huaqiao-logo.png" alt="Huaqiao University">
+          <img src="Huaqiao_Univ_logo.png" alt="Huaqiao University">
         </div>
         <div class="collab-name">Huaqiao University</div>
       </div>

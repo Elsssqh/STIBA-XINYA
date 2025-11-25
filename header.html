@@ -1,60 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Site Header (editable)</title>
-  <!-- Fonts used by header (optional, remove if already loaded in pages) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <style>
-    
-    header { display:flex; justify-content:space-between; align-items:center; padding:1rem 5%; background:rgba(13,51,82,0.85); width:100%; box-sizing:border-box; border-radius:50px; max-width:1200px; margin:1.5rem auto; }
-    .logo-container { display:flex; align-items:center; }
-    .logo-img { height:200px; width:auto; display:block; }
-    nav ul { display:flex; list-style:none; gap:1.6rem; align-items:center; margin:0; padding:0; }
-    nav a { color:white; text-decoration:none; font-size:0.95rem; font-weight:500; transition:all .2s; }
-    nav a:hover { color:#ffdd57; text-shadow:0 0 6px rgba(255,221,87,0.35); }
-    .dropdown { position:relative; }
-    .dropdown-menu { position:absolute; top:100%; left:0; background:rgba(13,51,82,0.95); list-style:none; padding:.4rem 0; margin:0; min-width:200px; border-radius:10px; opacity:0; visibility:hidden; transform:translateY(-8px); transition:all .22s; box-shadow:0 6px 16px rgba(0,0,0,.25); }
-    .dropdown:hover .dropdown-menu { opacity:1; visibility:visible; transform:translateY(0); }
-    .dropdown-menu li { padding:.45rem 1rem; }
-    .dropdown-menu a { color:white; display:block; font-size:.95rem; }
-    .globe-btn { background:rgba(255,255,255,0.12); width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; }
-    .globe-icon { font-size:1.1rem; color:white; }
+<!-- Header fragment: include into pages by fetching this file into the element with id="site-header" -->
+<!-- Font links (pages already load fonts, these are safe to keep) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    /* small responsive tweak */
-    @media (max-width:768px){ header{ flex-direction:column; gap:.8rem; padding:1rem; } nav ul{ flex-wrap:wrap; gap:1rem; justify-content:center; } }
-  </style>
-</head>
-<body>
+<style>
+  /* Header styles aligned with index.html theme */
+  header { display:flex; justify-content:space-between; align-items:center; padding:0.8rem 5%; background:rgba(13,51,82,0.85); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); width:100%; box-sizing:border-box; border-radius:50px; max-width:1200px; margin:0.5rem auto; }
+  .logo-container { display:flex; align-items:center; }
+  .logo-img { 
+    height: 150px; 
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
+  nav ul { display:flex; list-style:none; gap:1.6rem; align-items:center; margin:0; padding:0; }
+  nav a { color:white; text-decoration:none; font-size:0.95rem; font-weight:500; transition:all .2s; }
+  nav a:hover { color:#ffdd57; text-shadow:0 0 6px rgba(255,221,87,0.35); }
+  .dropdown { position:relative; }
+  .dropdown-menu { position:absolute; top:100%; left:0; background:rgba(13,51,82,0.95); list-style:none; padding:.4rem 0; margin:0; min-width:200px; border-radius:10px; opacity:0; visibility:hidden; transform:translateY(-8px); transition:all .22s; box-shadow:0 6px 16px rgba(0,0,0,.25); }
+  .dropdown:hover .dropdown-menu { opacity:1; visibility:visible; transform:translateY(0); }
+  .dropdown-menu li { padding:.45rem 1rem; }
+  .dropdown-menu a { color:white; display:block; font-size:.95rem; }
+  .globe-btn { background:rgba(255,255,255,0.12); width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .globe-icon { font-size:1.1rem; color:white; }
+  @media (max-width:768px){ 
+    header{ flex-direction:column; gap:.8rem; padding:1rem; }
+    nav ul{ flex-wrap:wrap; gap:1rem; justify-content:center; }
+    .logo-img { height: 64px; } /* Slightly smaller on mobile for balance */
+  }
+</style>
 
-  <!-- Header only: edit this file to change header site-wide (use fetch-include snippet in pages) -->
-  <header>
-    <div class="logo-container">
-      <img src="daguo.png" alt="STIBA Logo" class="logo-img">
-    </div>
-
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="aboutus.html">About</a></li>
-        <li class="dropdown">
-          <a href="#">Academic Program ▼</a>
-          <ul class="dropdown-menu">
-            <li><a href="inggris.html">S1 Sastra Inggris</a></li>
-            <li><a href="mandarin.html">S1 Mandarin</a></li>
-          </ul>
-        </li>
-        <li><a href="contactus.html">Contact Us</a></li>
-      </ul>
-    </nav>
-
-    <div class="globe-btn" title="Language / Switch">
-      <div class="globe-icon">🌐</div>
-    </div>
-  </header>
-
-</body>
-</html>
+<header>
+  <div class="logo-container">
+    <img src="daguo.png" alt="STIBA Logo" class="logo-img">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="aboutus.html">About</a></li>
+      <li class="dropdown">
+        <a href="#">Academic Program ▼</a>
+        <ul class="dropdown-menu">
+          <li><a href="inggris.html">S1 Sastra Inggris</a></li>
+          <li><a href="mandarin.html">S1 Mandarin</a></li>
+        </ul>
+      </li>
+      <li><a href="contactus.html">Contact Us</a></li>
+    </ul>
+  </nav>
+  <div class="globe-btn" title="Language / Switch"><div class="globe-icon">🌐</div></div>
+</header>
