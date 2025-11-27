@@ -1,16 +1,40 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>STIBA - 达国新雅学院</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font for "新雅" -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
-  
   <!-- Main text font -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- NEW: Configure Tailwind with blue theme -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans SC"', 'sans-serif'],
+          },
+          colors: {
+            slate: {
+              900: '#0f172a',
+              950: '#020617',
+            },
+            sky: { // Blue palette
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+            }
+          }
+        }
+      }
+    }
+  </script>
   
   <style>
     * {
@@ -19,51 +43,55 @@
       box-sizing: border-box;
     }
 
+    /* NEW: Apply dark background and custom scrollbar */
     body {
       font-family: 'Noto Sans SC', sans-serif;
-      background: #1e3a5f;
+      background-color: #0f172a; /* Override your original #1e3a5f */
       color: white;
       line-height: 1.6;
       overflow-x: hidden;
       position: relative;
     }
 
-    .background-image {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
-        /* url('新雅.png') no-repeat center center; */
-         url('新雅 (2).png') no-repeat center center;
-      background-size: cover;
-      z-index: -1;
-      will-change: transform;
-    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-    .background-image::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://via.placeholder.com/1920x1080/1e3a5f/ffffff?text=Pattern+Waves') repeat;
-      opacity: 0.1;
-      z-index: -1;
+    /* NEW: Animation Classes */
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
     }
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .reveal-delay-100 { transition-delay: 0.1s; }
+    .reveal-delay-200 { transition-delay: 0.2s; }
+    .reveal-delay-300 { transition-delay: 0.3s; }
+    .slide-in-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 1s ease-out;
+    }
+    .slide-in-left.active {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    /* Background layers moved to `header.html` (parallax + overlays). */
 
     /* Header/nav CSS moved to header.html to avoid duplication. */
     /* See: header.html (single source of truth for header and nav styles) */
 
-    /* Hero Section */
+    /* Hero Section - NEW: Updated structure to match second template */
     .hero {
       position: relative;
-      min-height: 100vh;
+      min-height: 80vh;
       display: flex;
-      align-items: flex-start;
+      align-items: center; /* Changed from flex-start */
       z-index: 3;
     }
 
@@ -80,6 +108,7 @@
       z-index: 10;
       line-height: 1;
       font-family: 'Zhi Mang Xing', cursive;
+      color: #0ea5e9; /* NEW: Apply blue color */
     }
 
     .content-wrapper {
@@ -111,7 +140,7 @@
     /* About Section */
     .about-section {
       padding: 10rem 5%;
-      background: rgba(13, 51, 82, 0.9);
+      background: rgba(13, 51, 82, 0.9); /* NEW: Keep your semi-transparent background */
       text-align: center;
       position: relative;
       z-index: 2;
@@ -142,7 +171,7 @@
     /* Collaboration Section */
     .collaboration-section {
       padding: 10rem 5%;
-      background: rgba(13, 51, 82, 0.9);
+      background: rgba(13, 51, 82, 0.9); /* NEW: Keep your semi-transparent background */
       text-align: center;
       position: relative;
       z-index: 1;
@@ -152,6 +181,7 @@
       font-family: 'Zhi Mang Xing', cursive;
       font-size: 5rem;
       margin-bottom: 2rem;
+      color: #ffffff; /* NEW: Apply blue color */
     }
 
     .collab-logos {
@@ -247,52 +277,83 @@
       }
     }
   </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://aistudiocdn.com/react@^19.2.0",
+      "react/": "https://aistudiocdn.com/react@^19.2.0/",
+      "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+      "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24"
+    }
+  }
+  </script>
 </head>
-<body>
+<body class="text-white selection:bg-sky-500 selection:text-white">
 
-  <div class="background-image"></div>
+  <!-- Background layers are provided by `header.html` include -->
+
   <div id="site-header"></div>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="vertical-text"></div>
-    <div class="content-wrapper">
-      <div class="text-content">
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        </p>
-      </div>
+  <section id="home" class="hero">
+    <div class="container mx-auto px-6 relative h-full flex flex-col md:flex-row items-center">
+        <!-- Left Side: Typography -->
+        <div class="flex-1 z-20 mt-10 md:mt-0 slide-in-left"> <!-- NEW: Apply slide-in-left animation -->
+            <div class="flex flex-col gap-2 md:gap-4 relative">
+                <h1 class="text-7xl md:text-9xl font-bold text-white tracking-tighter drop-shadow-2xl font-sans">STIBA</h1>
+                <!-- NEW: Changed text color to white and added drop shadow for better visibility -->
+                <h2 class="text-3xl md:text-5xl lg:text-6xl text-white font-serif italic tracking-wide drop-shadow-md">Tarumanagara Xinya</h2>
+                <div class="h-1 bg-white mt-4 w-24"></div>
+            </div>
+        </div>
+        <!-- Right Side: Content -->
+        <div class="flex-1 flex flex-col justify-center items-end text-right z-10 mt-16 md:mt-0 reveal reveal-delay-200"> <!-- NEW: Apply reveal animation -->
+            <div class="max-w-xl bg-slate-900/40 p-8 backdrop-blur-sm rounded-lg border-r-4 border-white/50 shadow-2xl"> <!-- NEW: Changed border color to white/50 -->
+                <h3 class="text-2xl md:text-3xl font-serif font-light mb-6 tracking-wide text-sky-100"> <!-- NEW: Apply blue text -->
+                    Where Eastern Wisdom Meets <br/>
+                    <span class="font-semibold text-white">Modern Innovation</span>
+                </h3>
+                <p class="text-lg text-gray-300 leading-relaxed font-light mb-8">
+                    Experience a unique educational paradigm that blends the profound wisdom of scholarly traditions with cutting-edge, interdisciplinary learning.
+                </p>
+                <button class="bg-sky-600 hover:bg-sky-500 text-white px-8 py-3 uppercase tracking-widest text-sm font-semibold transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-sky-900/20"> <!-- NEW: Apply blue button -->
+                    Explore Campus
+                </button>
+            </div>
+        </div>
     </div>
+    <!-- NEW: Keep your original vertical text, apply animation -->
+    
   </section>
 
   <!-- About Section -->
-  <section class="about-section">
+  <section id="about" class="about-section reveal"> <!-- NEW: Apply reveal animation -->
     <div class="about-logos">
-      <img src="daguo.png" alt="STIBA Tarumanagara Xinya" class="about-logo">
-      <img src="Logo-Yayasan-Tarumanagara-White-1980x715.png" alt="YAYASAN TARUMANAGARA" class="about-logo">
+      <img src="daguo.png" alt="STIBA Tarumanagara Xinya" class="about-logo reveal">
+      <img src="Logo-Yayasan-Tarumanagara-White-1980x715.png" alt="YAYASAN TARUMANAGARA" class="about-logo reveal reveal-delay-200">
     </div>
-    <div class="about-text">
+    <div class="about-text reveal reveal-delay-300">
       At Tarumanagara Xinya College, we offer a unique educational paradigm. We blend the profound wisdom of Eastern scholarly traditions with cutting-edge, interdisciplinary learning, creating a vibrant academic community dedicated to building a better future.
     </div>
   </section>
 
   <!-- Collaboration Section -->
-  <section class="collaboration-section">
-    <h2 class="section-title">Collaboration 合作</h2>
+  <section id="collaboration" class="collaboration-section">
+    <h2 class="section-title reveal playful-script">Collaboration 合作</h2>
     <div class="collab-logos">
-      <div class="collab-logo-item">
+      <div class="collab-logo-item reveal reveal-delay-100">
         <div class="collab-logo">
           <img src="Fujian_Normal_University_(crest).png" alt="Fujian Normal University">
         </div>
         <div class="collab-name">Fujian Normal University</div>
       </div>
-      <div class="collab-logo-item">
+      <div class="collab-logo-item reveal reveal-delay-200">
         <div class="collab-logo">
           <img src="sy.png" alt="Shenyang Normal University">
         </div>
         <div class="collab-name">Shenyang Normal University</div>
       </div>
-      <div class="collab-logo-item">
+      <div class="collab-logo-item reveal reveal-delay-300">
         <div class="collab-logo">
           <img src="Huaqiao_Univ_logo.png" alt="Huaqiao University">
         </div>
@@ -301,7 +362,6 @@
     </div>
   </section>
 
-
     <script>
       // Load header.html into the placeholder if present
       (function(){
@@ -309,12 +369,50 @@
           var p = document.getElementById('site-header'); if(p) p.innerHTML = html;
         }).catch(err=>console.error('Could not load header.html', err));
       })();
+
+      // NEW: Scroll animation script from second template
+      document.addEventListener('DOMContentLoaded', () => {
+            // Navbar Background on Scroll - Placeholder, adapt if you have a navbar
+            // const navbar = document.getElementById('navbar');
+            // window.addEventListener('scroll', () => { ... });
+
+            // Parallax Effect
+            window.addEventListener('scroll', () => {
+                const parallax = document.getElementById('parallax-bg');
+                if (parallax) {
+                    parallax.style.transform = `scale(1.1) translateY(${window.scrollY * 0.2}px)`;
+                }
+            });
+
+            // Intersection Observer for Scroll Animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.reveal, .slide-in-left').forEach(el => {
+                observer.observe(el);
+            });
+            // Trigger animations on load for Hero section elements
+            setTimeout(() => {
+                document.querySelector('.slide-in-left')?.classList.add('active');
+                document.querySelectorAll('.reveal').forEach(el => {
+                    // Only trigger hero reveals immediately if they are in viewport
+                    if(el.closest('#home')) {
+                         el.classList.add('active');
+                    }
+                });
+            }, 100);
+        });
     </script>
 
-  </body>
-  </html>
-
-
-
-
-  
+</body>
+</html>

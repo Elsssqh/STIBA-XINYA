@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>News - STIBA 达国新雅学院</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- ✅ Updated Tailwind Config: Lighter Blue Palette -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans SC"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+            'zhi-mang': ['"Zhi Mang Xing"', 'cursive'],
+          },
+          colors: {
+            slate: {
+              900: '#0f172a',
+              950: '#020617',
+              400: '#94a3b8', // used in pagination ellipsis
+              300: '#cbd5e1',
+              200: '#e2e8f0',
+              100: '#f1f5f9',
+            },
+            sky: {
+              // ✅ Lighter blues — shifted up
+              400: '#7dd3fc', // light sky (for hover)
+              500: '#38bdf8', // ✅ your new primary light blue
+              600: '#0ea5e9', // slightly darker for contrast (badges, active buttons)
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background-color: #0f172a;
+      color: white;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+    /* Scroll Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-100 { transition-delay: 0.1s; }
+    .reveal-delay-200 { transition-delay: 0.2s; }
+    .reveal-delay-300 { transition-delay: 0.3s; }
+
+    .slide-in-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: all 1s ease-out;
+    }
+    .slide-in-left.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .parallax-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -20;
+      background-color: #0f172a;
+      transform: scale(1.1);
+      transition: transform 0.1s ease-out;
+    }
+
+
+    .section-title {
+      font-family: 'Zhi Mang Xing', cursive;
+      font-size: 5rem;
+      margin-bottom: 2rem;
+      color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      .vertical-text {
+        left: 2%;
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .news-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body class="text-white selection:bg-sky-500 selection:text-slate-900">
+
+  <div id="site-header"></div>
+
+
+  <main>
+    <!-- Header Banner --><!-- Header Banner — NOW RIGHT-ALIGNED -->
+<section class="container mx-auto px-6 mb-16 text-right reveal active">
+  <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+    Campus <span class="text-sky-500 italic drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">News</span>
+  </h1>
+  <p class="text-xl text-slate-100 max-w-2xl ml-auto font-light drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]">
+    Updates, stories, and announcements from our vibrant academic community.
+  </p>
+</section>
+
+   <!-- Filters — NOW RIGHT-ALIGNED -->
+<section class="container mx-auto px-6 mb-12 reveal reveal-delay-100 active">
+  <div class="flex flex-wrap justify-end gap-4 w-full">
+    <button class="px-6 py-2 rounded-full bg-sky-600 text-white text-sm font-bold uppercase tracking-widest shadow-lg shadow-sky-900/20">All Posts</button>
+    <button class="px-6 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-sky-500/30 text-slate-200 text-sm font-bold uppercase tracking-widest transition-all">Academic</button>
+    <button class="px-6 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-sky-500/30 text-slate-200 text-sm font-bold uppercase tracking-widest transition-all">Events</button>
+    <button class="px-6 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-sky-500/30 text-slate-200 text-sm font-bold uppercase tracking-widest transition-all">Student Life</button>
+    <button class="px-6 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-sky-500/30 text-slate-200 text-sm font-bold uppercase tracking-widest transition-all">Research</button>
+  </div>
+</section>
+
+    <!-- Featured Article -->
+    <section class="container mx-auto px-6 mb-16 reveal reveal-delay-200 active">
+      <div class="bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 hover:border-sky-500/30 transition-all group">
+        <div class="grid md:grid-cols-2">
+          <div class="h-64 md:h-auto overflow-hidden relative">
+            <img src="https://picsum.photos/id/1/1200/800" alt="Featured News" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 left-4 bg-sky-600 text-white text-xs font-bold px-3 py-1 rounded-sm uppercase tracking-widest z-10">Featured</div>
+          </div>
+          <div class="p-8 md:p-12 flex flex-col justify-center">
+            <div class="flex items-center gap-2 mb-4 text-sm text-slate-300">
+              <span>October 24, 2024</span>
+              <span class="w-1 h-1 bg-sky-500 rounded-full"></span>
+              <span class="text-sky-500 uppercase tracking-widest font-semibold">Global Exchange</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-serif font-medium text-white mb-6 group-hover:text-sky-400 transition-colors">
+              Global Cultural Exchange Program Launches with 20 Partner Universities
+            </h2>
+            <p class="text-slate-100 mb-8 font-light leading-relaxed">
+              STIBA Tarumanagara Xinya welcomes students from partner universities worldwide for a semester of immersive cultural learning, language practice, and collaborative research initiatives.
+            </p>
+            <a href="#" class="inline-flex items-center text-sky-500 text-sm font-bold uppercase tracking-widest hover:text-sky-400 transition-colors group/link">
+              Read Full Story
+              <svg class="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Grid -->
+    <section class="container mx-auto px-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 news-grid">
+
+        <!-- Articles 1–6: unchanged classes — they’ll auto-update thanks to config -->
+        <!-- Only the color values change — no need to edit HTML -->
+        <article class="reveal group h-full">
+          <div class="bg-white/5 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 hover:border-sky-500/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-900/10 h-full flex flex-col">
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://picsum.photos/id/20/800/600" alt="News" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+              <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-sm uppercase tracking-widest">
+                Nov 02, 2024
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              <div class="text-sky-500 text-xs font-bold uppercase tracking-widest mb-2">Events</div>
+              <h3 class="text-xl font-serif font-medium text-white mb-3 group-hover:text-sky-400 transition-colors">Symposium on Eastern Philosophy & Modern Ethics</h3>
+              <p class="text-slate-200 text-sm leading-relaxed mb-6 flex-1">Distinguished scholars gathered to discuss the relevance of ancient wisdom in solving contemporary ethical challenges.</p>
+              <a href="#" class="inline-flex items-center text-slate-300 hover:text-sky-400 text-xs font-bold uppercase tracking-widest transition-colors">Read More</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="reveal reveal-delay-100 group h-full">
+          <div class="bg-white/5 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 hover:border-sky-500/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-900/10 h-full flex flex-col">
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://picsum.photos/id/24/800/600" alt="News" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+              <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-sm uppercase tracking-widest">
+                Nov 15, 2024
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              <div class="text-sky-500 text-xs font-bold uppercase tracking-widest mb-2">Academic</div>
+              <h3 class="text-xl font-serif font-medium text-white mb-3 group-hover:text-sky-400 transition-colors">New Mandarin Proficiency Certification Center</h3>
+              <p class="text-slate-200 text-sm leading-relaxed mb-6 flex-1">Inauguration of our new HSK testing center, providing students with direct access to global language certification.</p>
+              <a href="#" class="inline-flex items-center text-slate-300 hover:text-sky-400 text-xs font-bold uppercase tracking-widest transition-colors">Read More</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="reveal reveal-delay-200 group h-full">
+          <div class="bg-white/5 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 hover:border-sky-500/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-900/10 h-full flex flex-col">
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://picsum.photos/id/60/800/600" alt="News" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+              <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-sm uppercase tracking-widest">
+                Nov 20, 2024
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              <div class="text-sky-500 text-xs font-bold uppercase tracking-widest mb-2">Student Life</div>
+              <h3 class="text-xl font-serif font-medium text-white mb-3 group-hover:text-sky-400 transition-colors">Annual Cultural Festival Review</h3>
+              <p class="text-slate-200 text-sm leading-relaxed mb-6 flex-1">A look back at the vibrant performances, art exhibitions, and culinary showcases from last week's festival.</p>
+              <a href="#" class="inline-flex items-center text-slate-300 hover:text-sky-400 text-xs font-bold uppercase tracking-widest transition-colors">Read More</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="reveal group h-full">
+          <div class="bg-white/5 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 hover:border-sky-500/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-900/10 h-full flex flex-col">
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://picsum.photos/id/180/800/600" alt="News" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+              <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-sm uppercase tracking-widest">
+                Dec 05, 2024
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              <div class="text-sky-500 text-xs font-bold uppercase tracking-widest mb-2">Research</div>
+              <h3 class="text-xl font-serif font-medium text-white mb-3 group-hover:text-sky-400 transition-colors">Student Research Grants Awarded</h3>
+              <p class="text-slate-200 text-sm leading-relaxed mb-6 flex-1">Five undergraduate students have received grants to pursue independent research projects on Sino-Indonesian history.</p>
+              <a href="#" class="inline-flex items-center text-slate-300 hover:text-sky-400 text-xs font-bold uppercase tracking-widest transition-colors">Read More</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="reveal reveal-delay-100 group h-full">
+          <div class="bg-white/5 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 hover:border-sky-500/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-900/10 h-full flex flex-col">
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://picsum.photos/id/201/800/600" alt="News" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+              <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-sm uppercase tracking-widest">
+                Dec 12, 2024
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              <div class="text-sky-500 text-xs font-bold uppercase tracking-widest mb-2">Technology</div>
+              <h3 class="text-xl font-serif font-medium text-white mb-3 group-hover:text-sky-400 transition-colors">Digital Library Expansion</h3>
+              <p class="text-slate-200 text-sm leading-relaxed mb-6 flex-1">Access to thousands of new digital journals and archives is now available through the university portal.</p>
+              <a href="#" class="inline-flex items-center text-slate-300 hover:text-sky-400 text-xs font-bold uppercase tracking-widest transition-colors">Read More</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="reveal reveal-delay-200 group h-full">
+          <div class="bg-white/5 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 hover:border-sky-500/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-900/10 h-full flex flex-col">
+            <div class="h-48 overflow-hidden relative">
+              <img src="https://picsum.photos/id/250/800/600" alt="News" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+              <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-sm uppercase tracking-widest">
+                Dec 18, 2024
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              <div class="text-sky-500 text-xs font-bold uppercase tracking-widest mb-2">Alumni</div>
+              <h3 class="text-xl font-serif font-medium text-white mb-3 group-hover:text-sky-400 transition-colors">Alumni Network Gala Dinner</h3>
+              <p class="text-slate-200 text-sm leading-relaxed mb-6 flex-1">Registration is now open for the annual gala, connecting graduates across generations.</p>
+              <a href="#" class="inline-flex items-center text-slate-300 hover:text-sky-400 text-xs font-bold uppercase tracking-widest transition-colors">Read More</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Pagination -->
+      <div class="flex justify-center mt-16 gap-2 reveal">
+        <button class="w-10 h-10 flex items-center justify-center rounded-full border border-white/20 hover:bg-white hover:text-slate-900 transition-colors disabled:opacity-50" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <button class="w-10 h-10 flex items-center justify-center rounded-full bg-sky-600 text-white font-bold text-sm">1</button>
+        <button class="w-10 h-10 flex items-center justify-center rounded-full border border-white/20 hover:bg-white hover:text-slate-900 transition-colors text-sm text-slate-200">2</button>
+        <button class="w-10 h-10 flex items-center justify-center rounded-full border border-white/20 hover:bg-white hover:text-slate-900 transition-colors text-sm text-slate-200">3</button>
+        <span class="w-10 h-10 flex items-center justify-center text-slate-400">...</span>
+        <button class="w-10 h-10 flex items-center justify-center rounded-full border border-white/20 hover:bg-white hover:text-slate-900 transition-colors">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (async () => {
+      try {
+        const response = await fetch('header.html');
+        const html = await response.text();
+        document.getElementById('site-header').innerHTML = html;
+      } catch (err) {
+        console.error('Failed to load header.html:', err);
+      }
+    })();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener('scroll', () => {
+        const parallax = document.getElementById('parallax-bg');
+        if (parallax) {
+          parallax.style.transform = `scale(1.1) translateY(${window.scrollY * 0.2}px)`;
+        }
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.reveal, .slide-in-left').forEach(el => observer.observe(el));
+
+      setTimeout(() => {
+        document.querySelector('.slide-in-left')?.classList.add('active');
+        document.querySelectorAll('.reveal').forEach(el => {
+          if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('active');
+        });
+      }, 100);
+    });
+  </script>
+
+</body>
+</html>

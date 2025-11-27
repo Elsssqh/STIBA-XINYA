@@ -9,31 +9,33 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --primary-color: #1a3c5a;
       --secondary-color: #2c5a7f;
       --accent-color: #e6b422;
-      --accent-light: #f9e79f;
       --accent-dark: #d4a017;
       --dark-color: #122b40;
-      --white: #ffffff;
-      --light-bg: #f8fbff;
-      --card-bg: rgba(255, 255, 255, 0.95);
-      --card-border: rgba(230, 180, 34, 0.2);
+      --white: #fff;
       --text-primary: #2c3e50;
       --text-secondary: #7f8c8d;
-      --shadow-lg: 0 10px 30px rgba(26, 60, 90, 0.25);
       --shadow-md: 0 6px 18px rgba(26, 60, 90, 0.15);
-      --shadow-sm: 0 4px 12px rgba(26, 60, 90, 0.08);
+      --shadow-lg: 0 10px 30px rgba(26, 60, 90, 0.25);
       --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
+    /* Font Utilities */
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-sans { font-family: 'Noto Sans SC', sans-serif; }
+    .font-zhi-mang { font-family: 'Zhi Mang Xing', cursive; }
+    .text-accent { color: var(--accent-color); }
+
     *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
@@ -50,61 +52,55 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
       background:
-        linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
-        url('新雅 (1).png') no-repeat center center;
+        linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+        url('新雅 (2).png') center/cover no-repeat;
       background-size: cover;
-      z-index: -2;
-    }
-
-    .background-image::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url('pattern-waves.png') repeat;
-      opacity: 0.1;
       z-index: -1;
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 80px 20px 40px;
-      position: relative;
-      z-index: 1;
+      padding: 0 20px 40px;
     }
 
-    /* Hero */
+    /* Hero — Right-Aligned News Style */
     .hero {
-      text-align: center;
-      padding: 60px 20px;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 20px;
       position: relative;
-      overflow: hidden;
-      margin-bottom: 50px;
+      margin-bottom: 60px;
     }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(26, 60, 90, 0.85);
-      z-index: 1;
-    }
+
     .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      margin: 0 auto;
+      max-width: 600px;
+      text-align: right;
+      padding-right: 2rem;
     }
+
     .hero h1 {
-      font-family: 'Zhi Mang Xing', cursive;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
       font-size: 3.2rem;
-      margin-bottom: 15px;
+      margin-bottom: 1rem;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
+
+    .hero h1 .text-accent {
+      font-style: italic;
+      color: var(--accent-color);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
     .hero p {
       font-size: 1.1rem;
-      margin-bottom: 25px;
+      margin-bottom: 1.5rem;
       line-height: 1.7;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
     }
 
     .cta-button {
@@ -113,13 +109,13 @@
       color: var(--dark-color);
       padding: 14px 32px;
       border-radius: 30px;
-      text-decoration: none;
       font-weight: 600;
+      text-decoration: none;
       transition: var(--transition);
       box-shadow: var(--shadow-md);
-      border: none;
       font-family: 'Noto Sans SC', sans-serif;
     }
+
     .cta-button:hover {
       transform: translateY(-3px);
       box-shadow: var(--shadow-lg);
@@ -129,11 +125,13 @@
     /* Section Title */
     .section-title {
       text-align: center;
+      font-family: 'Playfair Display', serif;
       font-size: 2.2rem;
+      font-weight: 600;
       margin: 50px 0 30px;
       position: relative;
-      font-weight: 600;
     }
+
     .section-title::after {
       content: '';
       position: absolute;
@@ -146,90 +144,37 @@
       border-radius: 2px;
     }
 
-    /* Contact Info Boxes - Matching Reference Image */
+    /* Contact Info Grid */
     .contact-info-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 25px;
       margin-bottom: 50px;
     }
-    
+
     .info-box {
-      background: 
-        linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-        url('background.jpg') center/cover no-repeat;
+      background: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5));
+      border: 1px solid rgba(230, 180, 34, 0.3);
       border-radius: 16px;
       padding: 25px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: var(--transition);
-      color: var(--text-primary);
-      border: 1px solid rgba(230, 180, 34, 0.3);
-      position: relative;
-      overflow: hidden;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-    }
-    
-    .info-box:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
-    
-    .info-box-content {
-      flex: 1;
-      padding-right: 15px;
-    }
-    
-    .info-box-title {
-      font-family: 'Zhi Mang Xing', cursive;
-      font-size: 1.6rem;
-      margin-bottom: 8px;
-      color: var(--text-primary);
-      font-weight: 500;
-    }
-    
-    .info-box-subtitle {
-      font-family: 'Noto Sans SC', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: var(--text-primary);
-    }
-    
-    .info-box-value {
-      font-size: 1rem;
-      line-height: 1.5;
-      margin-bottom: 0;
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-    
-    .info-box-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      font-size: 20px;
-      color: var(--text-primary);
-      margin-left: 10px;
-    }
-    
-    .info-box-hour {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .info-box-hour span {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      font-weight: 500;
+      transition: var(--transition);
     }
 
-    /* Contact Section - Enhanced */
+    .info-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .info-box-content { flex: 1; padding-right: 15px; }
+    .info-box-title { font-family: 'Zhi Mang Xing', cursive; font-size: 1.6rem; margin-bottom: 8px; color: var(--text-primary); }
+    .info-box-subtitle { font-weight: 600; font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+    .info-box-value { font-weight: 500; line-height: 1.5; color: var(--text-primary); }
+    .info-box-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--text-primary); }
+
+    /* Contact Section */
     .contact-section {
       display: grid;
       grid-template-columns: 1fr 2fr;
@@ -237,24 +182,16 @@
       margin-bottom: 50px;
     }
 
-    .contact-sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
+    .contact-sidebar { display: flex; flex-direction: column; gap: 25px; }
 
     .contact-card {
-      background: 
-        linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-        url('background.jpg') center/cover no-repeat;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: var(--shadow-sm);
+      background: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5));
       border: 1px solid rgba(230, 180, 34, 0.3);
-      color: var(--text-primary);
+      border-radius: 16px;
+      padding: 30px;
       transition: var(--transition);
     }
-    
+
     .contact-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow-md);
@@ -263,13 +200,13 @@
     .card-title {
       font-family: 'Zhi Mang Xing', cursive;
       font-size: 1.8rem;
-      margin-bottom: 20px;
       text-align: center;
       color: var(--text-primary);
+      margin-bottom: 20px;
       position: relative;
       padding-bottom: 15px;
     }
-    
+
     .card-title::after {
       content: '';
       position: absolute;
@@ -287,13 +224,7 @@
       border-radius: 12px;
       overflow: hidden;
       margin: 20px 0;
-      box-shadow: var(--shadow-sm);
       border: 1px solid rgba(230, 180, 34, 0.3);
-    }
-    .map-container iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
     }
 
     .address-text {
@@ -311,13 +242,11 @@
       gap: 15px;
       margin-top: 20px;
     }
-    
+
     @media (max-width: 576px) {
-      .social-icons {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .social-icons { grid-template-columns: repeat(2, 1fr); }
     }
-    
+
     .social-icon {
       width: 55px;
       height: 55px;
@@ -325,26 +254,24 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       transition: var(--transition);
-      box-shadow: var(--shadow-sm);
-      background: rgba(255, 255, 255, 0.9);
-    }
-    
-    .social-icon:hover {
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: var(--shadow-md);
     }
 
-    /* Form Styles - Enhanced */
-    .form-group {
-      margin-bottom: 20px;
+    .social-icon:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
+
+    /* Form */
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
       margin-bottom: 20px;
     }
+
     label {
       display: block;
       margin-bottom: 8px;
@@ -352,17 +279,19 @@
       color: var(--text-primary);
       font-size: 0.95rem;
     }
+
     input, textarea {
       width: 100%;
       padding: 14px 18px;
       border: 2px solid #e5e9f0;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255,255,255,0.9);
       color: var(--text-primary);
       font-family: 'Noto Sans SC', sans-serif;
       font-size: 1rem;
       transition: var(--transition);
     }
+
     input:focus, textarea:focus {
       outline: none;
       border-color: var(--accent-color);
@@ -374,91 +303,60 @@
       gap: 15px;
       margin-top: 25px;
     }
+
     button {
       padding: 14px 24px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       font-weight: 600;
-      flex: 1;
       font-family: 'Noto Sans SC', sans-serif;
       font-size: 1rem;
+      flex: 1;
       transition: var(--transition);
     }
+
     .btn-primary {
       background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
       color: var(--dark-color);
-      box-shadow: var(--shadow-sm);
     }
+
     .btn-primary:hover {
       transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
       background: linear-gradient(135deg, var(--accent-dark), #c49010);
     }
+
     .btn-secondary {
       background: linear-gradient(135deg, #f5f7fa, #e4e7eb);
       color: var(--text-primary);
       border: 1px solid #dce1e8;
-      box-shadow: var(--shadow-sm);
-    }
-    .btn-secondary:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-      background: linear-gradient(135deg, #e4e7eb, #d1d8e0);
     }
 
-    /* Footer */
-    footer {
-      background: var(--dark-color);
-      padding: 50px 20px 30px;
-      margin-top: 60px;
-      text-align: center;
-      border-top: 2px solid var(--accent-color);
-    }
-    .footer-content {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .footer-logo {
-      height: 50px;
-      margin-bottom: 20px;
-    }
-    .footer-text {
-      font-size: 1rem;
-      opacity: 0.9;
-      line-height: 1.7;
-      font-weight: 500;
-    }
-    .copyright {
-      margin-top: 25px;
-      font-size: 0.9rem;
-      opacity: 0.7;
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, #e4e7eb, #d1d8e0);
     }
 
     /* Responsive */
     @media (max-width: 992px) {
-      .contact-section {
-        grid-template-columns: 1fr;
-      }
-      .form-row {
-        grid-template-columns: 1fr;
-      }
+      .contact-section { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
     }
+
     @media (max-width: 768px) {
-      .container { padding: 70px 15px 30px; }
+      .hero { height: auto; padding: 60px 20px; justify-content: center; }
+      .hero-content { text-align: center; padding-right: 0; }
       .hero h1 { font-size: 2.5rem; }
       .section-title { font-size: 1.9rem; }
       .map-container { height: 140px; }
-      .info-box { padding: 20px; }
-      .info-box-title { font-size: 1.4rem; }
     }
+
     @media (max-width: 480px) {
       .hero h1 { font-size: 2.2rem; }
       .hero p { font-size: 1rem; }
-      button { padding: 12px 20px; }
       .form-buttons { flex-direction: column; }
       .info-box { flex-direction: column; }
-      .info-box-content { padding-right: 0; margin-bottom: 15px; }
+      .info-box-content { margin-bottom: 15px; }
     }
   </style>
 </head>
@@ -466,152 +364,146 @@
   <div class="background-image"></div>
   <div id="site-header"></div>
 
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="font-serif font-bold">
+        Contact <span class="text-accent italic">Us</span>
+      </h1>
+      <p>
+        Ready to start your study journey? Get in touch with our admissions team.
+      </p>
+      <a href="#" class="cta-button">JOIN DEGREE PROGRAM</a>
+    </div>
+  </section>
+
   <div class="container">
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Contact Us<br><span class="zh"></span></h1>
-        <p><br>
-           Ready to start your study journey? Get in touch with our admissions team.</p>
-        <a href="#" class="cta-button">JOIN DEGREE PROGRAM</a>
-      </div>
-    </section>
+    <h2 class="section-title">Contact Information</h2>
 
-    <section>
-      <h2 class="section-title">Contact Information</h2>
-
-      <div class="contact-info-grid">
-        <div class="info-box">
-          <div class="info-box-content">
-            <h3 class="info-box-title">电话号码</h3>
-            <div class="info-box-subtitle">Phone Number</div>
-            <div class="info-box-value">0812-8888-2869</div>
-          </div>
-          <div class="info-box-icon">📞</div>
+    <div class="contact-info-grid">
+      <div class="info-box">
+        <div class="info-box-content">
+          <h3 class="info-box-title">电话号码</h3>
+          <div class="info-box-subtitle">Phone Number</div>
+          <div class="info-box-value">0812-8888-2869</div>
         </div>
-        
-        <div class="info-box">
-          <div class="info-box-content">
-            <h3 class="info-box-title">电子邮箱</h3>
-            <div class="info-box-subtitle">Email Address</div>
-            <div class="info-box-value">tarxin@tarumanagarafoundation.org</div>
-          </div>
-          <div class="info-box-icon">✉️</div>
-        </div>
-        
-        <div class="info-box">
-          <div class="info-box-content">
-            <h3 class="info-box-title">营业时间</h3>
-            <div class="info-box-subtitle">Operational Hour</div>
-            <div class="info-box-hour">
-              <span>Monday - Friday</span>
-              <span>08.30 - 16.30</span>
-            </div>
-          </div>
-          <div class="info-box-icon">⏰</div>
-        </div>
+        <div class="info-box-icon">📞</div>
       </div>
 
-      <!-- Contact Section - Match Your Design -->
-      <div class="contact-section">
-        <!-- Left Sidebar: Address + Social Media -->
-        <div class="contact-sidebar">
-          <!-- Campus Address Card -->
-          <div class="contact-card">
-            <h3 class="card-title"><span class="zh">校园地址</span><br>Campus Address</h3>
-            <div class="map-container">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.413949698412!2d106.79016917500921!3d-6.182905899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f43a8a489f97%3A0x5c7c703ca4e6b306!2sUniversitas%20Tarumanagara%20Kampus%202!5e0!3m2!1sen!2sid!4v1717000000000!5m2!1sen!2sid"
-                width="100%"
-                height="100%"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-              </iframe>
-            </div>
-            <p class="address-text">
-              Universitas Tarumanagara Kampus 2<br>
-              Hall BC Lt.2, Jl. Tanjung Duren Utara<br>
-              No.1 Grogol Petamburan,<br>
-              Jakarta Barat, 11470
-            </p>
-          </div>
+      <div class="info-box">
+        <div class="info-box-content">
+          <h3 class="info-box-title">电子邮箱</h3>
+          <div class="info-box-subtitle">Email Address</div>
+          <div class="info-box-value">tarxin@tarumanagarafoundation.org</div>
+        </div>
+        <div class="info-box-icon">✉️</div>
+      </div>
 
-          <!-- Social Media Card -->
-          <div class="contact-card">
-            <h3 class="card-title"><span class="zh">社交媒体</span><br>Our Social Media</h3>
-            <div class="social-icons">
-              <a href="#" class="social-icon" style="background: linear-gradient(135deg, #E1306C, #C81953);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.847.07 3.257.148 4.771 1.691 4.918 4.919.058 1.262.069 1.644.07 4.847v.09c-.002 3.195-.013 3.577-.07 4.847-1.48 3.244-3.223 4.674-4.919 4.919-1.262.058-1.644.069-4.847.07h-.09c-3.195-.002-3.577-.013-4.847-.07-3.244-1.48-4.674-3.223-4.919-4.919-.057-1.262-.069-1.644-.07-4.847v-.09c.002-3.195.013-3.577.07-4.847 1.48-3.244 3.223-4.674 4.919-4.919.984-.057 1.644-.069 4.847-.07zm0-2.163c-3.244 0-3.584.012-4.847.07-1.262.058-1.644.069-4.847.07v.09c.002 3.195.013 3.577.07 4.847 1.48 3.244 3.223 4.674 4.919 4.919.984.057 1.644.069 4.847.07h.09c3.195-.002 3.577-.013 4.847-.07 3.244-1.48 4.674-3.223 4.919-4.919.058-1.262.069-1.644.07-4.847v-.09c-.002-3.195-.013-3.577-.07-4.847-1.48-3.244-3.223-4.674-4.919-4.919-.984-.057-1.644-.069-4.847-.07zm0 5.838c-3.405 0-6.162 2.757-6.162 6.162s2.757 6.162 6.162 6.162 6.162-2.757 6.162-6.162-2.757-6.162-6.162-6.162zm0 10.162c-2.28 0-4.162-1.882-4.162-4.162S9.72 9.72 12 9.72s4.162 1.882 4.162 4.162-1.882 4.162-4.162 4.162z"/>
-                </svg>
-              </a>
-              <a href="#" class="social-icon" style="background: linear-gradient(135deg, #0077B5, #005587);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.55v-5.82c0-1.394-.026-3.178-2.04-3.178-2.04 0-2.37 1.506-2.37 3.076v5.922H5.9V14.55c0-3.056 1.97-4.515 4.44-4.515 2.11 0 3.16.903 3.68 1.886h.046v-1.886h3.55v10.85zm-11.928-10.62c0-1.536-.884-2.404-2.116-2.404-1.238 0-2.116.868-2.116 2.404 0 1.537.878 2.405 2.116 2.405 1.232 0 2.116-.868 2.116-2.405zM22 0H2C.9 0 0 .9 0 2v20c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V2c0-1.1-.9-2-2-2z"/>
-                </svg>
-              </a>
-              <a href="#" class="social-icon" style="background: linear-gradient(135deg, #1877F2, #0d5abf);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-              </a>
-              <a href="#" class="social-icon" style="background: linear-gradient(135deg, #000, #333);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h-2.8v.447h-1.45v-.447h-2.8v17.5h2.8v-.447h1.45v.447h2.8v-17.5zm-6.44 15.043c-1.07 0-1.975-.786-1.975-1.757 0-.972.905-1.758 1.975-1.758s1.975.786 1.975 1.758c0 .971-.905 1.757-1.975 1.757zm-6.44 0c-1.07 0-1.975-.786-1.975-1.757 0-.972.905-1.758 1.975-1.758s1.975.786 1.975 1.758c0 .971-.905 1.757-1.975 1.757z"/>
-                </svg>
-              </a>
-            </div>
+      <div class="info-box">
+        <div class="info-box-content">
+          <h3 class="info-box-title">营业时间</h3>
+          <div class="info-box-subtitle">Operational Hour</div>
+          <div class="info-box-hour" style="display:flex;justify-content:space-between">
+            <span>Monday - Friday</span>
+            <span>08.30 - 16.30</span>
           </div>
         </div>
+        <div class="info-box-icon">⏰</div>
+      </div>
+    </div>
 
-        <!-- Right Column: Business Inquiry Form -->
+    <div class="contact-section">
+      <!-- Sidebar -->
+      <div class="contact-sidebar">
         <div class="contact-card">
-          <h3 class="card-title">Contact Us for Business Inquiry<br><span class="zh">业务联系</span></h3>
-          <form id="contactForm">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" id="firstName" required>
-              </div>
-              <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" required>
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" required>
-            </div>
-            <div class="form-group">
-              <label for="description">Description</label>
-              <textarea id="description" rows="4" required></textarea>
-            </div>
-            <div class="form-buttons">
-              <button type="button" class="btn-secondary">Clear Form</button>
-              <button type="submit" class="btn-primary">Send Message</button>
-            </div>
-          </form>
+          <h3 class="card-title font-zhi-mang">校园地址<br><span class="font-sans text-base">Campus Address</span></h3>
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.413949698412!2d106.79016917500921!3d-6.182905899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f43a8a489f97%3A0x5c7c703ca4e6b306!2sUniversitas%20Tarumanagara%20Kampus%202!5e0!3m2!1sen!2sid!4v1717000000000!5m2!1sen!2sid"
+              width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy">
+            </iframe>
+          </div>
+          <p class="address-text">
+            Universitas Tarumanagara Kampus 2<br>
+            Hall BC Lt.2, Jl. Tanjung Duren Utara<br>
+            No.1 Grogol Petamburan,<br>
+            Jakarta Barat, 11470
+          </p>
+        </div>
+
+        <div class="contact-card">
+          <h3 class="card-title font-zhi-mang">社交媒体<br><span class="font-sans text-base">Our Social Media</span></h3>
+          <div class="social-icons">
+            <!-- IG -->
+            <a href="#" class="social-icon" style="background: linear-gradient(135deg, #E1306C, #C81953);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.847.07 3.257.148 4.771 1.691 4.918 4.919.058 1.262.069 1.644.07 4.847v.09c-.002 3.195-.013 3.577-.07 4.847-1.48 3.244-3.223 4.674-4.919 4.919-1.262.058-1.644.069-4.847.07h-.09c-3.195-.002-3.577-.013-4.847-.07-3.244-1.48-4.674-3.223-4.919-4.919-.057-1.262-.069-1.644-.07-4.847v-.09c.002-3.195.013-3.577.07-4.847 1.48-3.244 3.223-4.674 4.919-4.919.984-.057 1.644-.069 4.847-.07zm0-2.163c-3.244 0-3.584.012-4.847.07-1.262.058-1.644.069-4.847.07v.09c.002 3.195.013 3.577.07 4.847 1.48 3.244 3.223 4.674 4.919 4.919.984.057 1.644.069 4.847.07h.09c3.195-.002 3.577-.013 4.847-.07 3.244-1.48 4.674-3.223 4.919-4.919.058-1.262.069-1.644.07-4.847v-.09c-.002-3.195-.013-3.577-.07-4.847-1.48-3.244-3.223-4.674-4.919-4.919-.984-.057-1.644-.069-4.847-.07zm0 5.838c-3.405 0-6.162 2.757-6.162 6.162s2.757 6.162 6.162 6.162 6.162-2.757 6.162-6.162-2.757-6.162-6.162-6.162zm0 10.162c-2.28 0-4.162-1.882-4.162-4.162S9.72 9.72 12 9.72s4.162 1.882 4.162 4.162-1.882 4.162-4.162 4.162z"/>
+              </svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="#" class="social-icon" style="background: linear-gradient(135deg, #0077B5, #005587);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.55v-5.82c0-1.394-.026-3.178-2.04-3.178-2.04 0-2.37 1.506-2.37 3.076v5.922H5.9V14.55c0-3.056 1.97-4.515 4.44-4.515 2.11 0 3.16.903 3.68 1.886h.046v-1.886h3.55v10.85zm-11.928-10.62c0-1.536-.884-2.404-2.116-2.404-1.238 0-2.116.868-2.116 2.404 0 1.537.878 2.405 2.116 2.405 1.232 0 2.116-.868 2.116-2.405zM22 0H2C.9 0 0 .9 0 2v20c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V2c0-1.1-.9-2-2-2z"/>
+              </svg>
+            </a>
+            <!-- Facebook -->
+            <a href="#" class="social-icon" style="background: linear-gradient(135deg, #1877F2, #0d5abf);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <!-- X (Twitter) -->
+            <a href="#" class="social-icon" style="background: linear-gradient(135deg, #000, #333);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h-2.8v.447h-1.45v-.447h-2.8v17.5h2.8v-.447h1.45v.447h2.8v-17.5zm-6.44 15.043c-1.07 0-1.975-.786-1.975-1.757 0-.972.905-1.758 1.975-1.758s1.975.786 1.975 1.758c0 .971-.905 1.757-1.975 1.757zm-6.44 0c-1.07 0-1.975-.786-1.975-1.757 0-.972.905-1.758 1.975-1.758s1.975.786 1.975 1.758c0 .971-.905 1.757-1.975 1.757z"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
-    </section>
 
-    <script>
-      // Load header.html
-      (function(){
-        fetch('header.html')
-          .then(r => r.ok ? r.text() : Promise.reject())
-          .then(html => {
-            const el = document.getElementById('site-header');
-            if (el) el.innerHTML = html;
-          })
-          .catch(() => console.warn('⚠️ header.html not loaded'));
-      })();
-    </script>
+      <!-- Form -->
+      <div class="contact-card">
+        <h3 class="card-title font-zhi-mang">Contact Us for Business Inquiry<br><span class="font-sans text-base">业务联系</span></h3>
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" rows="4" required></textarea>
+          </div>
+          <div class="form-buttons">
+            <button type="button" class="btn-secondary">Clear Form</button>
+            <button type="submit" class="btn-primary">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
+
+  <script>
+    fetch('header.html')
+      .then(r => r.ok ? r.text() : console.warn('⚠️ header.html not loaded'))
+      .then(html => {
+        const el = document.getElementById('site-header');
+        if (el) el.innerHTML = html;
+      })
+      .catch(console.error);
+  </script>
 </body>
 </html>

@@ -36,26 +36,7 @@
       position: relative;
     }
 
-    /* 🔹 Latar belakang — tetap ada */
-    .background-image {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background:
-        linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
-        url('新雅 (2).png') no-repeat center center;
-      background-size: cover;
-      z-index: -2;
-    }
-    .background-image::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url('pattern-waves.png') repeat;
-      opacity: 0.1;
-      z-index: -1;
-    }
+    /* Background layers are provided site-wide via header.html (parallax + overlays) */
 
     /* 🔹 Container utama — tambahkan padding atas agar tidak tertutup header sticky */
     .container {
@@ -316,10 +297,7 @@
 </head>
 
 <body>
-  <!-- 🔹 Background tetap di body -->
-  <div class="background-image"></div>
-
-  <!-- 🔹 Header dimuat dari header.html -->
+  <!-- Header and site background are loaded from `header.html` -->
   <div id="site-header"></div>
 
   <!-- 🔹 Konten utama -->
@@ -390,6 +368,16 @@
         .then(html => {
           const p = document.getElementById('site-header');
           if (p) p.innerHTML = html;
+
+          // Initialize parallax background (header.html injects .parallax-bg)
+          const par = document.querySelector('.parallax-bg');
+          if (par) {
+            const onScroll = () => {
+              par.style.transform = `scale(1.1) translateY(${window.scrollY * 0.2}px)`;
+            };
+            window.addEventListener('scroll', onScroll);
+            onScroll();
+          }
         })
         .catch(err => console.warn('⚠️ header.html not loaded:', err));
     })();
