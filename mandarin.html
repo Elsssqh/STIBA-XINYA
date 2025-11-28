@@ -439,8 +439,151 @@
                 grid-template-rows: auto;
             }
         }
+
+        /* === Minimal Popup & Press Effect — No Design Changes === */
+
+/* ✅ Subtle press-down feedback (like mobile button) */
+.card:active {
+    transform: translateY(-2px) scale(0.985);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* ✅ Popup Modal — uses your existing colors & spacing */
+.program-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.program-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: #fff;
+    color: #122b40;
+    width: 90%;
+    max-width: 560px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transform: scale(0.96);
+    transition: transform 0.3s ease;
+}
+
+.program-modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    background: #1a3c5a;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-title-en {
+    font-size: 1.6rem;
+    margin: 0;
+    color: white;
+    font-weight: 600;
+}
+
+.modal-title-zh {
+    font-family: 'Zhi Mang Xing', cursive;
+    font-size: 2.6rem;
+    color: #e6b422;
+    margin-top: 8px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.modal-body p {
+    line-height: 1.6;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.modal-features h4 {
+    font-size: 1.15rem;
+    color: #2c5a7f;
+    margin: 16px 0 8px;
+}
+
+.modal-features ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-features li {
+    margin-bottom: 6px;
+    line-height: 1.5;
+}
+
+.modal-btn {
+    display: inline-block;
+    background: #e6b422;
+    color: #122b40;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.modal-btn:hover {
+    background: #d4a017;
+}
     </style>
 </head>
+<!-- ✅ Popup Modal (hidden by default) -->
+<div class="program-modal" id="popupModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button class="modal-close" id="closeModal">&times;</button>
+      <h3 class="modal-title-en" id="popupTitleEn"></h3>
+      <div class="modal-title-zh" id="popupTitleZh"></div>
+    </div>
+    <div class="modal-body">
+      <p id="popupDesc"></p>
+      <div class="modal-features">
+        <h4>Key Features:</h4>
+        <ul id="popupFeatures"></ul>
+      </div>
+      <a href="#" class="modal-btn">Learn More</a>
+    </div>
+  </div>
+</div>
 <body>
   <div id="site-header"></div>
 
@@ -451,9 +594,8 @@
             <a href="#programs" class="btn">Explore Program Details</a>
         </section>
 
-        <!-- ✅ Bagian Programs — diganti dengan card vertikal -->
         <section id="programs" class="programs-section">
-            <h2 class="section-title">Our Academic Programs</h2>
+            
             <div class="programs-grid">
                 <!-- Card 1: Keguruan Mandarin -->
                 <div class="card">
@@ -570,7 +712,115 @@
           var p = document.getElementById('site-header'); if(p) p.innerHTML = html;
         }).catch(err=>console.error('Could not load header.html', err));
       })();
+// ✅ Popup Data (matches your 4 cards in order)
+const programs = [
+  {
+    en: "Keguruan Mandarin",
+    zh: "华语教学",
+    desc: "Prepare future Mandarin teachers with pedagogical theory, classroom practice, and cultural immersion.",
+    features: [
+      "Teaching methodology & curriculum design",
+      "Practicum in partner schools",
+      "HSK & teacher certification prep",
+      "Cross-cultural communication training"
+    ]
+  },
+  {
+    en: "Bisnis Mandarin",
+    zh: "华语商务",
+    desc: "Integrate Mandarin fluency with international business strategy, negotiation, and market analysis.",
+    features: [
+      "Business correspondence & presentation",
+      "Trade simulation & case studies",
+      "Internship in multinational firms",
+      "Economic & legal terminology"
+    ]
+  },
+  {
+    en: "Pariwisata Mandarin",
+    zh: "华语旅游",
+    desc: "Train bilingual tourism professionals for guiding, hospitality, and destination management.",
+    features: [
+      "Tour guiding certification",
+      "Cultural heritage studies",
+      "Hospitality Mandarin",
+      "Field trips to tourism sites"
+    ]
+  },
+  {
+    en: "Penerjemah Mandarin",
+    zh: "华语翻译",
+    desc: "Develop professional translation & interpreting skills for legal, business, and media contexts.",
+    features: [
+      "Translation theory & ethics",
+      "CAT tools (Trados, MemoQ)",
+      "Simultaneous interpreting practice",
+      "Legal & technical text specialization"
+    ]
+  }
+];
 
+// ✅ Attach click → popup
+document.querySelectorAll('.card').forEach((card, index) => {
+  card.addEventListener('click', () => {
+    const p = programs[index];
+    document.getElementById('popupTitleEn').textContent = p.en;
+    document.getElementById('popupTitleZh').textContent = p.zh;
+    document.getElementById('popupDesc').textContent = p.desc;
+    document.getElementById('popupFeatures').innerHTML = 
+      p.features.map(f => `<li>${f}</li>`).join('');
+    
+    document.getElementById('popupModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+// ✅ Close popup
+document.getElementById('closeModal').addEventListener('click', () => {
+  document.getElementById('popupModal').classList.remove('active');
+  document.body.style.overflow = '';
+});
+
+// Close on backdrop click or Esc
+document.getElementById('popupModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) {
+    e.currentTarget.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('popupModal').classList.contains('active')) {
+    document.getElementById('popupModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+
+// ✅ Restore "Our Academic Programs" title (you accidentally deleted it)
+const programsSection = document.querySelector('#programs');
+if (programsSection && !programsSection.querySelector('.section-title')) {
+  const title = document.createElement('h2');
+  title.className = 'section-title';
+  title.innerHTML = 'Our Academic Programs';
+  title.style.textAlign = 'center';
+  title.style.fontSize = '2.2rem';
+  title.style.marginBottom = '40px';
+  title.style.color = 'var(--white)';
+  title.style.position = 'relative';
+  title.innerHTML += `
+    <span style="
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background-color: var(--accent-color);
+      border-radius: 2px;
+      display: block;
+    "></span>
+  `;
+  programsSection.insertBefore(title, programsSection.firstChild);
+}
     </script>
 </body>
 </html>
