@@ -170,6 +170,11 @@
                             <span>Publish Article</span>
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
                         </button>
+                        
+                        <button type="button" id="cancelEditBtn" class="hidden w-full mt-2 bg-slate-800 text-slate-400 hover:text-white py-2 rounded-lg text-sm font-medium"
+                                onclick="cancelEdit()">
+                          ↩️ Cancel Editing
+                        </button>
                     </form>
                 </div>
             </div>
@@ -213,6 +218,7 @@
             }
         }
 
+        // ====== Load News ======
         async function loadNews() {
             try {
                 const res = await fetch('http://localhost:5000/api/news');
@@ -231,7 +237,9 @@
 
                 list.innerHTML = news.map(item => {
                     const date = new Date(item.published_date || item.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
-                    const imgUrl = item.image_url ? `http://localhost:5000${item.image_url}` : 'https://placehold.co/200x150/1e293b/475569?text=No+Img';
+                    const imgUrl = item.image_url 
+                      ? `http://localhost:5000${item.image_url}` 
+                      : 'https://placehold.co/200x150/1e293b/475569?text=No+Img';
 
                     return `
                     <div class="group glass-panel p-4 rounded-xl hover:bg-slate-800/80 hover:border-sky-500/30 transition-all duration-300 flex flex-col md:flex-row gap-5 items-stretch relative overflow-hidden">
@@ -254,65 +262,158 @@
                         </div>
 
                         <div class="flex md:flex-col justify-center gap-2 mt-2 md:mt-0 md:ml-2 border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-4">
+                            <button onclick="editNews(${item.id})" class="p-3 text-slate-400 hover:text-sky-400 hover:bg-sky-500/10 rounded-lg transition-colors group/edit" title="Edit">
+                                <svg class="w-5 h-5 group-hover/edit:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                </svg>
+                            </button>
                             <button onclick="deleteNews(${item.id})" class="p-3 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors group/del" title="Delete">
-                                <svg class="w-5 h-5 group-hover/del:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                <svg class="w-5 h-5 group-hover/del:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
                             </button>
                         </div>
                     </div>
                     `;
                 }).join('');
-            } catch (err) { console.error(err); }
+            } catch (err) { 
+                console.error('Failed to load news:', err);
+                document.getElementById('newsList').innerHTML = `<p class="text-red-400 col-span-3 text-center">⚠️ Failed to load articles. Check console.</p>`;
+            }
         }
 
-        document.getElementById('addNewsForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('button[type="submit"]');
-            const originalContent = btn.innerHTML;
-            
-            btn.innerHTML = '<span class="animate-pulse">Publishing...</span>';
-            btn.disabled = true;
-            btn.classList.add('opacity-70', 'cursor-not-allowed');
+        // ====== Cancel Edit Button Logic ======
+        function cancelEdit() {
+          const form = document.getElementById('addNewsForm');
+          form.reset();
+          delete form.dataset.editId;
+          document.getElementById('cancelEditBtn').classList.add('hidden');
+          
+          const btn = form.querySelector('button[type="submit"]');
+          btn.innerHTML = `
+            <span>Publish Article</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+            </svg>
+          `;
+        }
 
-            const formData = new FormData(e.target);
-            if (!formData.get('published_date')) formData.delete('published_date');
+        // ====== Edit News ======
+        async function editNews(id) {
+          try {
+            const res = await fetch(`http://localhost:5000/api/news/id/${id}`);
+            if (!res.ok) throw new Error('Article not found');
+            const article = await res.json();
 
-            try {
-                const res = await fetch('http://localhost:5000/api/news', {
-                    method: 'POST',
-                    headers: { 'Authorization': `Bearer ${token}` },
-                    body: formData
-                });
+            const form = document.getElementById('addNewsForm');
+            form.querySelector('[name="title"]').value = article.title || '';
+            form.querySelector('[name="category"]').value = article.category || 'Academic';
+            form.querySelector('[name="summary"]').value = article.summary || '';
+            form.querySelector('[name="content"]').value = article.content || '';
 
-                if (res.ok) {
-                    alert('✅ Published Successfully!');
-                    e.target.reset();
-                    document.getElementById('fileNameDisplay').innerHTML = '<span class="font-bold text-sky-400">Click to upload</span> image';
-                    document.getElementById('dropzone').classList.remove('border-emerald-500/50', 'bg-emerald-500/10');
-                    loadNews();
-                } else {
-                    const d = await res.json();
-                    alert('❌ Error: ' + d.message);
-                }
-            } catch (error) { 
-                alert('Connection Error');
-            } finally {
-                btn.innerHTML = originalContent;
-                btn.disabled = false;
-                btn.classList.remove('opacity-70', 'cursor-not-allowed');
+            const dateInput = form.querySelector('[name="published_date"]');
+            if (article.published_date) {
+              const d = new Date(article.published_date);
+              dateInput.value = d.toISOString().split('T')[0];
+            } else {
+              dateInput.value = '';
             }
+
+            form.dataset.editId = id;
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = `
+              <span>Update Article</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            `;
+
+            document.getElementById('cancelEditBtn').classList.remove('hidden');
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } catch (err) {
+            alert('❌ Failed to load article: ' + (err.message || 'Unknown error'));
+            console.error(err);
+          }
+        }
+
+        // ====== Delete News ======
+        async function deleteNews(id) {
+          if(!confirm('Permanently delete this article?')) return;
+          try {
+            await fetch(`http://localhost:5000/api/news/${id}`, {
+              method: 'DELETE',
+              headers: { 'Authorization': `Bearer ${token}` }
+            });
+            loadNews();
+          } catch (err) { 
+            alert('Failed to delete'); 
+            console.error(err);
+          }
+        }
+
+        // ====== Form Submit (Create or Update) ======
+        document.getElementById('addNewsForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const form = e.target;
+          const btn = form.querySelector('button[type="submit"]');
+          const originalContent = btn.innerHTML;
+
+          btn.innerHTML = '<span class="animate-pulse">Saving...</span>';
+          btn.disabled = true;
+          btn.classList.add('opacity-70', 'cursor-not-allowed');
+
+          const formData = new FormData(form);
+          if (!formData.get('published_date')) formData.delete('published_date');
+
+          try {
+            let url = 'http://localhost:5000/api/news';
+            let method = 'POST';
+            const editId = form.dataset.editId;
+
+            if (editId) {
+              url = `http://localhost:5000/api/news/${editId}`;
+              method = 'PUT';
+            }
+
+            const res = await fetch(url, {
+              method,
+              headers: { 'Authorization': `Bearer ${token}` },
+              body: formData
+            });
+
+            if (res.ok) {
+              alert(editId ? '✅ Article updated!' : '✅ Published Successfully!');
+              form.reset();
+              delete form.dataset.editId;
+              document.getElementById('cancelEditBtn').classList.add('hidden');
+
+              btn.innerHTML = `
+                <span>Publish Article</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                </svg>
+              `;
+              document.getElementById('fileNameDisplay').innerHTML = '<span class="font-bold text-sky-400">Click to upload</span> image';
+              document.getElementById('dropzone').classList.remove('border-emerald-500/50', 'bg-emerald-500/10');
+
+              loadNews();
+            } else {
+              const d = await res.json().catch(() => ({}));
+              alert('❌ Error: ' + (d.message || 'Unknown error'));
+              console.error('API Error:', d);
+            }
+          } catch (error) {
+            alert('❌ Network or server error. Check DevTools Console.');
+            console.error('Fetch error:', error);
+          } finally {
+            btn.innerHTML = originalContent;
+            btn.disabled = false;
+            btn.classList.remove('opacity-70', 'cursor-not-allowed');
+          }
         });
 
-        async function deleteNews(id) {
-            if(!confirm('Permanently delete this article?')) return;
-            try {
-                await fetch(`http://localhost:5000/api/news/${id}`, {
-                    method: 'DELETE',
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                loadNews();
-            } catch (err) { alert('Failed to delete'); }
-        }
-
+        // Initial load
         loadNews();
     </script>
 </body>

@@ -56,14 +56,21 @@ app.get('/api/news', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-
-// GET Single News
-app.get('/api/news/:slug', async (req, res) => {
+// GET Single News by ID (for admin/edit functionality)
+app.get('/api/news/id/:id', async (req, res) => {
     try {
-        const [rows] = await db.execute('SELECT * FROM news WHERE slug = ?', [req.params.slug]);
-        if (rows.length === 0) return res.status(404).json({ message: 'Article not found' });
+        const id = parseInt(req.params.id, 10);
+        if (isNaN(id)) {
+            return res.status(400).json({ message: 'Invalid ID' });
+        }
+
+        const [rows] = await db.execute('SELECT * FROM news WHERE id = ?', [id]);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Article not found' });
+        }
         res.json(rows[0]);
     } catch (err) {
+        console.error('Get by ID error:', err);
         res.status(500).json({ error: err.message });
     }
 });
@@ -113,5 +120,68 @@ app.delete('/api/news/:id', async (req, res) => {
     }
 });
 
+
+// UPDATE News by ID
+app.put('/api/news/:id', upload.single('image'), async (req, res) => {
+    try {
+        const id = parseInt(req.params.id, 10);
+        if (isNaN(id)) {
+            return res.status(400).json({ message: 'Invalid ID' });
+        }
+
+        // Get current record to preserve image if not updated
+        const [existingRows] = await db.execute('SELECT image_url FROM news WHERE id = ?', [id]);
+        if (existingRows.length === 0) {
+            return res.status(404).json({ message: 'Article not found' });
+        }
+
+        const { title, category, summary, content, author_name, published_date } = req.body;
+        const currentImageUrl = existingRows[0].image_url;
+        const newImageUrl = req.file ? `/uploads/${req.file.filename}` : currentImageUrl;
+
+        // Generate slug from title (keep consistent)
+        let slug = title ? slugify(title, { lower: true, strict: true }) + '-' + Date.now() : '';
+
+        const query = `
+            UPDATE news 
+            SET title = ?, slug = ?, category = ?, summary = ?, content = ?, 
+                image_url = ?, author_name = ?, published_date = ?
+            WHERE id = ?
+        `;
+
+        await db.execute(query, [
+            title,
+            slug || null,
+            category,
+            summary,
+            content,
+            newImageUrl,
+            author_name || 'Admin',
+            published_date || new Date(),
+            id
+        ]);
+
+        res.json({ message: 'News updated successfully' });
+
+    } catch (err) {
+        console.error('Update error:', err);
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// Add this route to fetch a single news article by its slug (for public/article view)
+app.get('/api/news/:slug', async (req, res) => {
+    try {
+        const slug = req.params.slug;
+        const [rows] = await db.execute('SELECT * FROM news WHERE slug = ?', [slug]);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Article not found' });
+        }
+        res.json(rows[0]); // Send the first (and should be only) matching article
+    } catch (err) {
+        console.error('Error fetching article by slug:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
