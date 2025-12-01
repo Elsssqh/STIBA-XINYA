@@ -1,92 +1,35 @@
-<!-- Header fragment: include into pages by fetching this file into the element with id="site-header" -->
-<!-- Font links (pages already load fonts, these are safe to keep) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<!-- Headline font (used by News: 'Playfair Display') -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-<!-- Playful script font for specific headings -->
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-  /* Site-wide background layers (index-style) */
+  /* Keep your existing CSS exactly as is */
   .parallax-bg {
     background-image: url('https://picsum.photos/1920/1080?grayscale&blur=2');
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    z-index: -30;
-    opacity: 0.45;
-    transform: scale(1.1);
-    transition: transform 0.2s linear;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center; z-index: -30;
+    opacity: 0.45; transform: scale(1.1); transition: transform 0.2s linear;
   }
-
   .background-image-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-      linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
-      url('新雅 (2).png') no-repeat center center;
-    background-size: cover;
-    z-index: -20;
-    will-change: transform;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('新雅 (2).png') no-repeat center center;
+    background-size: cover; z-index: -20; will-change: transform;
   }
-
   .background-pattern-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
-    opacity: 0.08;
-    mix-blend-mode: overlay;
-    z-index: -10;
-    pointer-events: none;
+    opacity: 0.08; mix-blend-mode: overlay; z-index: -10; pointer-events: none;
   }
-
-  /* Header styles (centered container above background) */
   header {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 3%;
-    background:rgba(13,51,82,0.85);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    width:100%;
-    box-sizing:border-box;
-    border-radius:18px;
-    max-width:1200px;
-    margin:1rem auto;
-    min-height:150px;
-    position:relative;
-    z-index:200;
+    display:flex; justify-content:space-between; align-items:center; padding:0 3%;
+    background:rgba(13,51,82,0.85); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    width:100%; box-sizing:border-box; border-radius:18px; max-width:1200px;
+    margin:1rem auto; min-height:150px; position:relative; z-index:200;
   }
-  
-  /* Apply Playfair only to section-style titles to avoid overriding hero typography */
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    margin: 0;
-    }
-    /* Optional playful script — apply by adding `playful-script` to an element */
-    .section-title.playful-script,
-    .playful-script {
-      font-family: 'Dancing Script', cursive;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      /* keep size flexible — pages can override if needed */
-  }
-  /* keep nav links in the sans family for readability */
+  .section-title { font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: -0.01em; margin: 0; }
+  .playful-script { font-family: 'Dancing Script', cursive; font-weight: 700; letter-spacing: 0.01em; }
   nav a { font-family: 'Noto Sans SC', sans-serif; }
   .logo-container { display:flex; align-items:center; height:150px; }
   .logo-img { max-height:100%; height:auto; width:auto; display:block; object-fit:contain; }
@@ -100,10 +43,15 @@
   .dropdown-menu a { color:white; display:block; font-size:.95rem; }
   .globe-btn { background:rgba(255,255,255,0.12); width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; }
   .globe-icon { font-size:1.1rem; color:white; }
+  
+  /* --- NEW STYLES FOR ADMIN LINKS --- */
+  .admin-link a { color: #aaa !important; font-size: 0.85rem; } /* Subtle login link */
+  .dashboard-link a { color: #38bdf8 !important; font-weight: bold; } /* Blue Dashboard */
+  .logout-link a { color: #ff6b6b !important; } /* Red Logout */
+
   @media (max-width:768px){ header{ flex-direction:column; gap:.8rem; padding:1rem; } nav ul{ flex-wrap:wrap; gap:1rem; justify-content:center; } .logo-container{ height:64px; } .logo-img{ max-height:100%; } }
 </style>
 
-<!-- Background layers inserted once via header include (fixed-position) -->
 <div id="parallax-bg" class="parallax-bg" aria-hidden="true"></div>
 <div class="background-image-overlay" aria-hidden="true"></div>
 <div class="background-pattern-overlay" aria-hidden="true"></div>
@@ -122,10 +70,14 @@
         <ul class="dropdown-menu">
           <li><a href="mandarin.html">S1 Mandarin</a></li>
           <li><a href="inggris.html">S1 Sastra Inggris</a></li>
-          
         </ul>
       </li>
       <li><a href="contactus.html">Contact Us</a></li>
+      
+      <li id="nav-login" class="admin-link"><a href="admin-login.html">Login</a></li>
+      
+      <li id="nav-dashboard" class="dashboard-link" style="display: none;"><a href="admin-dashboard.html">Dashboard</a></li>
+      <li id="nav-logout" class="logout-link" style="display: none;"><a href="#" onclick="logoutUser()">Logout</a></li>
     </ul>
   </nav>
   <div class="globe-btn" title="Language / Switch"><div class="globe-icon">🌐</div></div>

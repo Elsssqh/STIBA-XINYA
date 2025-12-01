@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - STIBA Tarumanagara Xinya</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                    },
+                    colors: {
+                        slate: { 900: '#0f172a', 950: '#020617' },
+                        sky: { 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7' },
+                        amber: { 500: '#f59e0b' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Parallax Backgrounds identical to Header */
+        .parallax-bg {
+            background-image: url('https://picsum.photos/1920/1080?grayscale&blur=2');
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center; z-index: -30;
+            opacity: 0.45; transform: scale(1.1);
+        }
+        .background-image-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('新雅 (2).png') no-repeat center center;
+            background-size: cover; z-index: -20;
+        }
+        .background-pattern-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.05; mix-blend-mode: overlay; z-index: -10; pointer-events: none;
+        }
+        
+        /* Smooth Fade In */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0; transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="h-screen w-full overflow-hidden flex flex-col items-center justify-center text-white relative">
+
+    <div class="parallax-bg"></div>
+    <div class="background-image-overlay"></div>
+    <div class="background-pattern-overlay"></div>
+
+    <div class="relative z-10 flex flex-col items-center gap-8 w-full max-w-md px-6 fade-in-up">
+        
+        <a href="index.html" class="group flex flex-col items-center gap-3 transition-transform hover:scale-105">
+            <div class="relative">
+                <div class="absolute -inset-4 bg-sky-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <img src="daguo.png" alt="STIBA Logo" class="h-24 drop-shadow-2xl relative z-10">
+            </div>
+            <div class="flex items-center gap-2 text-slate-400 group-hover:text-white transition-colors duration-300">
+                <svg class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                <span class="text-xs font-bold uppercase tracking-[0.2em]">Return to Home</span>
+            </div>
+        </a>
+
+        <div class="w-full bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-8 md:p-10 relative overflow-hidden group/card">
+            
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sky-500 to-transparent opacity-50"></div>
+
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-serif font-bold text-white mb-2">Admin Portal</h1>
+                <p class="text-sm text-slate-400 font-light">Enter your credentials to access the dashboard.</p>
+            </div>
+
+            <form id="loginForm" class="flex flex-col gap-5">
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500 group-focus-within:text-sky-400 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    </div>
+                    <input type="text" id="username" placeholder="Username" 
+                        class="w-full pl-10 pr-4 py-3 bg-slate-950/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all shadow-inner" required>
+                </div>
+
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500 group-focus-within:text-sky-400 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    </div>
+                    <input type="password" id="password" placeholder="Password" 
+                        class="w-full pl-10 pr-4 py-3 bg-slate-950/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all shadow-inner" required>
+                </div>
+
+                <button type="submit" class="mt-2 w-full bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white font-bold py-3.5 rounded-lg shadow-lg shadow-sky-900/30 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2">
+                    <span>Sign In</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+            </form>
+
+            <div id="errorMsg" class="hidden mt-6 p-3 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-3 text-red-300 text-sm animate-pulse">
+                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span id="errorText">Invalid credentials</span>
+            </div>
+
+            <div class="mt-8 text-center">
+                <p class="text-xs text-slate-500">Protected area. Unauthorized access is prohibited.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const btn = e.target.querySelector('button');
+            const originalContent = btn.innerHTML;
+            const errorBox = document.getElementById('errorMsg');
+
+            // Reset UI
+            errorBox.classList.add('hidden');
+            btn.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Verifying...';
+            btn.disabled = true;
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            try {
+                // 1. Send Login Request to Backend
+                const res = await fetch('http://localhost:5000/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    // 2. Success Logic
+                    localStorage.setItem('token', data.token);
+                    
+                    btn.classList.replace('from-sky-600', 'from-emerald-600');
+                    btn.classList.replace('to-sky-500', 'to-emerald-500');
+                    btn.innerHTML = `
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span>Access Granted</span>
+                    `;
+                    
+                    setTimeout(() => {
+                        window.location.href = 'admin-dashboard.html';
+                    }, 800);
+                } else {
+                    // 3. Error Logic
+                    throw new Error(data.message || 'Login failed');
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById('errorText').textContent = err.message || 'Server connection failed';
+                errorBox.classList.remove('hidden');
+                
+                // Shake Animation
+                const card = document.querySelector('.group\\/card');
+                card.classList.add('animate-[shake_0.5s_ease-in-out]');
+                setTimeout(() => card.classList.remove('animate-[shake_0.5s_ease-in-out]'), 500);
+
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+            }
+        });
+    </script>
+</body>
+</html>
